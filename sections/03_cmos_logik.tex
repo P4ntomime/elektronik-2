@@ -1,0 +1,53 @@
+\section{CMOS-Logik}
+
+\begin{itemize}
+    \item Entweder leitender Pfad nach $V_{SS}$ (NMOS) oder $V_{DD}$ (PMOS)
+    \item Kein statischer Stromverbrauch
+    \item Langsamer als Bipolar
+    \item Symmetrische Schaltschwellen (skaliert mit $V_{DD}$)
+    \item Output-Level $V_{ol}$, $V_{oh}$ näher bei Speisung als Input Level $V_{il}$, $V_{ih}$ \textrightarrow mehr Marge
+    \item Höhere Speisespannung \textrightarrow weniger propagation delay
+\end{itemize}
+
+
+\subsection{Grundgatter in CMOS-Logik}
+
+\begin{minipage}[t]{0.32\columnwidth}
+    \begin{center}
+        \textbf{Inverter} \\
+        \includegraphics[width=\columnwidth]{images/cmos_inverter.png}
+    \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.27\columnwidth}
+    \begin{center}
+        \textbf{NAND-Gate} \\
+        \includegraphics[width=\columnwidth]{images/cmos_nand_2.png}
+    \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.38\columnwidth}
+    \begin{center}
+        \textbf{NOR-Gate} \\
+        \includegraphics[width=\columnwidth]{images/cmos_nor.png}
+    \end{center}
+\end{minipage}
+
+
+\subsection{Dualität NMOS - PMOS}
+
+\begin{minipage}[c]{0.45\columnwidth}
+    \begin{center}
+        \textbf{PMOS} \\
+        \includegraphics[width=\columnwidth]{images/nmos_dualitaet.png}
+    \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.45\columnwidth}
+    \begin{center}
+        \textbf{NMOS} \\
+        \includegraphics[width=\columnwidth]{images/pmos_dualitaet.png}
+    \end{center}
+\end{minipage}
+
+% TODO: Kennlinien / Charakteristik CMOS-Technologie...?
