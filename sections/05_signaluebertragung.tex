@@ -1,0 +1,45 @@
+\section{Signalübertragung}
+
+\subsection{Leitungstheorie}
+
+\begin{itemize}
+    \item Leitungen haben Widerstände, Kapazitäten und Induktivitäten \textrightarrow\ RLC-Netzwerke
+    \item \textbf{Fortpflanzungsgeschwindigkeit Signal:} $v = 10 - 20 \, \centi \meter / \nano \second$ \\
+        (Lichtgeschwindigkeit: $c = 0 \, \centi \meter / \nano \second$)
+    \item Ev. \textbf{Impedanzanpassungen} zur Verhinderung von \textbf{Reflexionen} nötig (meistens $50 \, \ohm$)
+    \item CMOS-Logik: tiefen Quellenwiderstand, hohen Eingangswiderstand \\
+        \textrightarrow\ Nicht geeignet zur Datenübertragung über 'längere Strecken'
+\end{itemize}
+
+
+\subsection{Einfluss / Relevanz von Refelxionen}
+
+\subsubsection{Keine Reflexionen}
+
+Wenn nichts anderes bekannt gilt: $T_r = \frac{1}{10} \cdot T$ 
+
+\begin{minipage}[c]{0.3\columnwidth}
+    $$ \boxed{ T_d < \frac{1}{2} \cdot T_r} $$
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.68\columnwidth}
+    \begin{tabular}{ll}
+        $T_r = T_f$ & Anstiegs- / bzw. Abfallzeit des Signals \\
+        $T_d$       & Laufzeit des Signals \\
+        $T$         & Periodendauer
+    \end{tabular}
+\end{minipage}
+
+
+\subsubsection{Reflexionen}
+
+\begin{minipage}[c]{0.3\columnwidth}
+    $$ \boxed{ l > \frac{1 \cdot 10^7 \, \frac{\meter}{\second} }{f_{max}} } $$
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.68\columnwidth}
+    \begin{tabular}{ll}
+        $f_{max}$   & Maximal enthaltene Frequenz im Signal \\
+        $l$         & Länge der Leitung 
+    \end{tabular}
+\end{minipage}

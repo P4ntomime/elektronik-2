@@ -4,9 +4,10 @@
     \item Entweder leitender Pfad nach $V_{SS}$ (NMOS) oder $V_{DD}$ (PMOS)
     \item Kein statischer Stromverbrauch
     \item Langsamer als Bipolar
-    \item Symmetrische Schaltschwellen (skaliert mit $V_{DD}$)
-    \item Output-Level $V_{ol}$, $V_{oh}$ näher bei Speisung als Input Level $V_{il}$, $V_{ih}$ \textrightarrow mehr Marge
-    \item Höhere Speisespannung \textrightarrow weniger propagation delay
+    \item Symmetrische Schaltschwellen bei ca. $\frac{V_{DD}}{2}$ (Übertrgaungskennlinie)
+    \item Output-Level $V_{ol}$, $V_{oh}$ näher bei Speisung als Input Level $V_{il}$, $V_{ih}$ \textrightarrow\ mehr Marge
+    \item Höhere Speisespannung \textrightarrow\ weniger propagation delay
+    \item Nicht geeignet zur Datenübertragung über längere Strecken (kein $50 \, \ohm$ Abschluss)
 \end{itemize}
 
 
@@ -50,4 +51,36 @@
     \end{center}
 \end{minipage}
 
+
+\subsection{Verlustleistung bei CMOS-Logik}
+
+\begin{minipage}[c]{0.48\columnwidth}
+    $$ \boxed{ P_V = C \cdot V_{CC}^2 \cdot f} $$
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    \begin{tabular}{ll}
+        $C$ & Kapazität (aus Datenblatt) \\
+        $f$ & Frequenz 
+    \end{tabular}
+\end{minipage}
+
+
+\subsection{Verzögerungszeit}
+
+\begin{minipage}[t]{0.48\columnwidth}
+    \textbf{Linearer Bereich}
+    $$ \boxed{t_{pHL} = 0.69 \cdot R_{on} \cdot C_L} $$
+    \textrightarrow\ Exponentielle Entladung! 
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+    \textbf{Sättigung (Stromquellen-Bereich)}
+    $$ \boxed{t_{pHL} = \frac{C_L \cdot \frac{V_{swing}}{2}}{I_{sat}} \approx \frac{C_L}{k_n \cdot V_{DD}} }$$
+    \textrightarrow\ Lineare Entladung!
+\end{minipage}
+
+
 % TODO: Kennlinien / Charakteristik CMOS-Technologie...?
+% \section{CMOS  vs. TTL Logikpegel}
+% \includegraphics[width=0.75\columnwidth]{images/logik_pegel.png}
