@@ -1,0 +1,190 @@
+\section{Spannungsreferenzen}
+
+\begin{itemize}
+    \item Referenzspannungsquellen liefern idealerweise Ausgangsspannungen, welche \textbf{unabhängig} von 
+        Temperatur, Speisespannung und Last sind
+    \item 2 Hauptprinzipien: Zenerdioden (meistens mit $V_Z = 5.6 \,\volt$) und Bandgap-Quellen mit $V_{out} = 1.25 \, \volt$
+\end{itemize}
+
+
+\subsection{Spanungsteiler}
+
+\begin{minipage}[c]{0.2\columnwidth}
+    \includegraphics[width=\columnwidth]{images/spannungsteiler.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.78\columnwidth}
+    \myul{\textbf{Speisespannungsabhängigkeit}}
+
+    \begin{tabular}{ll}
+        Spannungsänderung:  & $\boxed{\Delta V_{ref} = \Delta V_{POS} \frac{R_2}{R_1 + R_2}} $ \\
+        Sensitivität:       & $\boxed{ \overunderset{V_{ref}}{V_{POS}}{S} = 
+                                \frac{\frac{\Delta V_{ref}}{\Delta V_{POS}}}{\frac{\Delta V_{POS}}{V_{POS}}} = 1 \text{ \textrightarrow\ schlecht}}$
+    \end{tabular}
+
+    \vspace{0.2cm}
+    \myul{\textbf{Temperaturabhängigkeit}} \\
+    Da die Widerstände \textbf{gleichen Temperaturkoeffizeienten} haben ändert sich der Strom durch $R_1$ und $R_2$, jedoch nicht das 
+    Widerstandsverhältnis \textrightarrow\ $V_{ref}$ bleibt \textbf{konstant} \textrightarrow\ gut
+
+\end{minipage}
+
+\myul{\textbf{Spannungsänderung bei Lastwechsel}} \\
+
+\begin{minipage}[c]{0.2\columnwidth}
+    \includegraphics[width=\columnwidth]{images/thevenin.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.78\columnwidth}
+    Ersatzschaltung der Referenzquelle durch Thévenin-Äquivalent mit
+    $$ R_P = R_1 || R_2 \quad \text{\textrightarrow\ sehr lastabhängig, da } R_P \text{ gross} $$
+\end{minipage}
+
+
+\subsection{Diodenreferenz}
+
+\begin{minipage}[c]{0.2\columnwidth}
+    \includegraphics[width=\columnwidth]{images/diodenreferenz.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.78\columnwidth}
+    $$ \boxed{ V_{ref} = V_D = n \cdot V_T \cdot \ln \Big( \frac{I}{I_S} \Big) 
+    \quad \text{mit } V_T =\frac{k T}{q} \approx 25 \, \milli \ampere } $$
+    %$$ I = \frac{V_{POS} - V_D}{R_1} \approx \frac{V_{POS}}{R_1} $$ % bei Platzproblemen weglassen
+
+    \myul{\textbf{Speisespannungsabhängigkeit}}
+    
+    \begin{tabular}{ll}
+        Sensitivität:   & $ \boxed{ \overunderset{V_{ref}}{I}{S} = \frac{1}{\ln \Big( \frac{I}{I_S} \Big)} = 0.065 \text{ \textrightarrow\ gut }} $
+    \end{tabular}
+
+    \vspace{0.2cm}
+    \myul{\textbf{Temperaturabhängigkeit}} \\
+    Diode hat einen \textbf{Temperaturkoeffizeient von} $\boldsymbol{-2 \frac{\milli \volt}{\kelvin}}$, d.h. $V_{ref}$ ändert ebenfalls
+    mit ${-2 \frac{\milli \volt}{\kelvin}}$ \textrightarrow\ schlecht
+\end{minipage}
+
+\myul{\textbf{Spannungsänderung bei Lastwechsel}} \\
+
+\begin{minipage}[c]{0.2\columnwidth}
+    \includegraphics[width=\columnwidth]{images/thevenin.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.78\columnwidth}
+    Diode durch Kleinsignal-Ersatzschaltung ersatzen und Ersatzschaltung der Referenzquelle durch Thévenin-Äquivalent mit
+    $$ R_P = R_1 || r_D \quad \text{\textrightarrow\ weniger lastabhängig, da } r_D = \frac{n \cdot V_T}{I_D} \approx 7 \, \ohm $$
+\end{minipage}
+
+
+\subsection{Spannungsreferenz mit mehreren Dioden}
+
+\begin{minipage}[c]{0.25\columnwidth}
+    \includegraphics[width=\columnwidth]{images/spannungsreferenz_4_dioden.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.73\columnwidth}
+    $m = $ Anzahl Dioden in Serie (links: $m = 4$) 
+
+    \begin{itemize}
+        \item Strom durch Dioden muss $> 0 \, \ampere$ sein, damit $V_D \approx 0.7 \, \volt$
+        \item Spannung über $m$ Dioden: $ \boxed{ V_{out} = m \cdot V_D }$
+        \item Max. Ausgangsstrom: $ \boxed{I_{out, max} =  \frac{V_{pos} - V_{out}}{R_1}} $
+        \item \textbf{Temperaturabhängigkeit:} $TK_{tot} = m \cdot -2 \frac{\milli \volt}{\kelvin}$
+    \end{itemize}
+
+\end{minipage}
+
+
+\subsection{Spannungsreferenz mit Zenerdioden (Shunt-Regler)}
+
+\textbf{Shunt-Regler:} Überflüssiger Strom wird durch ein Element abgeführt 
+    \textrightarrow\ Je nach Last wird mehr oder weniger Strom in Z-Diode verheizt
+
+\begin{minipage}[c]{0.15\columnwidth}
+    \includegraphics[width=\columnwidth]{images/spannungsreferenz_z-diode.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.78\columnwidth}
+    \begin{itemize}
+        \item $V_{REF}$ entspricht Zener-Spannung der Z-Diode
+        \item Häufigste Zener-Spannung: $5.6 \, \volt$ \textrightarrow\ TK $= 0 \frac{\milli \volt}{\kelvin}$
+        \item Strom $I = \frac{V_{POS} - V_{REF}}{R_1}$ fliesst entweder durch Diode oder durch Last
+        \item $I_{out} < I_{out, max} = \frac{V_{POS} - V_{REF}}{R_1}$
+    \end{itemize}
+
+\end{minipage}
+
+
+\subsection[Bootstrap-Referenz (VD Stromquelle)]{Bootstrap-Referenz ($V_D$ Stromquelle)}
+
+\begin{minipage}[c]{0.27\columnwidth}
+    \includegraphics[width=\columnwidth]{images/bootstrap.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.71\columnwidth}
+    \begin{itemize}
+        \item Stromspiegel $M_3$ und $M_4$ \textrightarrow\ $I_1 = I_2$
+        \item Stromspiegel $M_1$ und $M_2$ \textrightarrow\ $V_{GS1} = V_{GS1}$ da $I_1 = I_2$
+        \item Da Temperaturkoeffizeient von $V_{D1} \approx -2 \frac{\milli \volt}{\kelvin}$ nimmt $I_{out}$ mit steigender
+            Temperatur ab \textrightarrow\ schlechte Referenz
+        \item Schaltung hat zwei mögliche Arbeitspunkte (AP $I_1 = I_2 = 0$ ist unerwünscht!)
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \begin{tabular}{c c}
+        $ \boxed{ V_{D1} = I_2 \cdot R_2 = V_{R2}} $ & $ \boxed{ I_{REF} = I_1 = I_2 } $
+    \end{tabular}
+\end{minipage}
+
+
+\subsection{Proportional To Absolute Temperature (PTAT)}
+
+\begin{minipage}[c]{0.28\columnwidth}
+    \includegraphics[width=\columnwidth]{images/ptat.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.7\columnwidth}
+
+    \begin{tabular}{c c}    % tabular config / settings?
+        $V_D = n \cdot \frac{k T}{q} \cdot \ln \Big( \frac{I_D}{I_S} \Big)$ & 
+        $V_{DN} = n \cdot \frac{k T}{q} \cdot \ln \Big( \frac{I_D}{N \cdot I_S} \Big)$
+    \end{tabular}
+
+    $$ \boxed{ \Delta V_D = V_D - V_{DN} = n \cdot \frac{k T}{q} \cdot \ln(N)  = TK \cdot T }$$
+    \textrightarrow $\Delta V_T$ ist Proportional zur absoluten Temperatur $T$
+\end{minipage}
+
+
+\subsection{Bandgap-Spannungsreferenz}
+
+\begin{minipage}[c]{0.2\columnwidth}
+    \includegraphics[width=\columnwidth]{images/bandgap_referenz.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.78\columnwidth}
+    $$ \boxed{ V_{REF} = K \cdot V_{PTAT} + V_D } $$
+    \begin{itemize}
+        \item Der positive Temperaturkoeffizient von $V_{PTAT}$ wird mit dem Faktor $K$ verstärkt, sodass 
+            $K \cdot TK_{PTAT} = +2 \frac{\milli \volt}{\kelvin}$
+        \item Der nun positive Temperaturkoeffizient wird mit einer Diodenquelle mit $TK_{Diode} = -2 \frac{\milli \volt}{\kelvin}$
+            kompensiert
+        \item Der gesamte Temperaturkoeffizient $TK_{bandgap} = 0 \frac{\milli \volt}{\kelvin}$
+        \item $V_{REF}$ buffern, damit der Ausgang belastet werden darf
+    \end{itemize}
+\end{minipage}
+
+
+\example{LM4041 Shunt Voltage Bandgap Reference}
+
+\begin{minipage}[c]{0.25\columnwidth}
+    \includegraphics[width=\columnwidth]{images/beispiel_bandgap.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.72\columnwidth}
+    $$ \boxed{ V_{out} = V_Z = V_{REF} \Big( 1 + \frac{R_2}{R_1} \Big) } $$
+    \begin{itemize}
+        \item Einstellbare Referenzspannung $V_Z = V_{out}$
+        \item Interne Referenz: $V_{REF} = 1.25 \, \volt$ (Bandgap-Referenz)
+    \end{itemize}
+\end{minipage}
+
