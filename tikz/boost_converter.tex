@@ -1,0 +1,58 @@
+% Aufwärtswandler (Boost, Step up)
+% 
+% Author:   Alex Krieg
+% Date:     02.04.2024
+
+
+\begin{center}
+    \scalebox{0.6}{%
+        \begin{circuitikz}[thick]
+            % Gitternetzlinien im Hintergrund
+            %\draw[xstep=1cm, ystep=1cm, line width=0.1mm, color=lightgray] (0,0) grid (6,4);
+
+            % Einstellungen für Symbole
+            \ctikzset
+            {  
+                inductor            =   american, 
+                resistor            =   european,
+                inductors/scale     =   1.0, 
+                capacitors/scale    =   0.8,
+                diodes/scale        =   0.6,
+                line width          =   0.5,
+            }
+            \def\labelOffset{0.4}
+
+            % Knoten
+            \coordinate (input) at (0,2);
+            \coordinate (K1) at (2,2);
+            \coordinate (K2) at (4,2);
+            \coordinate (output) at (5,2);
+            \coordinate (G1) at (2,0);
+            \coordinate (G2) at (4,0);
+
+            % Kreuzungspunkte
+            \draw (input)   node[circ]{};
+            \draw (K1)      node[circ]{};
+            \draw (K2)      node[circ]{};
+            \draw (output)  node[circ]{};
+
+            % Knotenbeschriftungen
+            \node at ($(input)+(0,\labelOffset)$)  {$V_{IN}$};
+            \node at ($(output)+(0,\labelOffset)$) {$V_{OUT}$};
+
+            % Schaltung
+            %      Start Pos    Symbol type             Name    End Pos
+            \draw (input)   to [L,                      l=$L$]  (K1);               % Suple
+            \draw (K1)      to [normal open switch,     l=$S$]  (G1);               % Schalter
+            \draw (K1)      to [diode,                  l=$D$]  (K2);               % Diode
+            \draw (K2)      to [curved capacitor,       l=$C$]  (G2);               % Kondensator
+            \node at ($(G2) + (0.2,1.3)$)  {+};                                     % + Symbol am Kondensator
+
+            \draw (K2)      to [short](output);
+
+            \draw (G1)      node[tlground](GND){}; 
+            \draw (G2)      node[tlground](GND){}; 
+
+        \end{circuitikz}
+    }
+\end{center}
