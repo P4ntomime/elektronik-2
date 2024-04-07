@@ -17,13 +17,23 @@ $20 \, \kilo \hertz$ bis zu einigen $\mega \hertz$ liegen.
             $V_L = L \cdot \frac{\diff i_L}{\diff t}$ oder $I_L= \frac{1}{L} \int V_L(t) \, \diff t + I_0  = \frac{V_L}{L} \cdot t + I_0$ 
         \2 Zur Stabilisierung der Spannung werden Kondensatoren benötigt (potentieller LC-Schwingkreis!)
         \2 Für die meisten Rechnungen kann man annehmen, dass:
-            \3 $V_{in}$ und $V_{out}$ konstant sind
-            \3 Die Schalter ideal sind (kein Schaltwiderstand)
-            \3 die Dioden keinen Spannungsabfall haben
+            \3 $V_{in}$ und $V_{out}$ \textbf{konstant} sind
+            \3 Die \textbf{Schalter ideal} sind (kein Schaltwiderstand)
+            \3 die\textbf{Dioden keinen Spannungsabfall} haben
 \end{outline}
 
 \textbf{Hinweis:} Zur Steigerung der Effizienz werden Dioden manchmal durch MOS-FETs ersetzt ('nur' $R_{DS,on}$ statt grosser
 Spannungsabfall). Die Schalter werden in der Praxis ebenfalls mit einem FET realisiert.
+
+\subsection{Energien in den Komponenten}
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{ll}
+    Energie in Spule                & $E_L = \frac{1}{2} \cdot L \cdot i_L^2$ \\
+    Energie in Kondensator          & $E_C = \frac{1}{2} \cdot C \cdot V_C^2$ \\
+    Energie in Last (pro Periode)   & $E_{load} = \frac{1}{2} P_{load} \cdot T_{clk} = \frac{1}{2} \cdot \frac{V_{out}^2}{R_{load}} \cdot T_{clk}$
+\end{tabular}
+\renewcommand{\arraystretch}{1}
 
 
 \subsection{Aufwärtswandler (Boost, Step-Up Converter)}
@@ -53,11 +63,8 @@ In \textbf{beiden Phasen} gelten die folgenden Formeln:
                                     & $ I_{L_{on}} = \frac{1}{L} \cdot V_{in} \cdot t_{on} + I_0 $\\ 
     \cvt{Entladephase}              & $ \Delta I_{L_{off}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{off}$ \\ 
                                     & $I_{L_{off}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{off} + I_0$ \\
-    Gleichgewicht (eingeschwungen)  & $ \Delta I_{L_{on}} = \Delta I_{L_{off}}$ \\ 
-    Ausgangsspannung                & $V_{out} = V_{in} \cdot \Big( 1 + \frac{t_{on}}{t_{off}} \Big)$ \\
-    Energie in Spule                & $E_L = \frac{1}{2} \cdot L \cdot i_L^2$ \\
-    Energie in Kondensator          & $E_C = \frac{1}{2} \cdot C \cdot V_C^2$ \\
-    Energie in Last (pro Periode)   & $E_{load} = \frac{1}{2} P_{load} \cdot T_{clk} = \frac{1}{2} \cdot \frac{V_{out}^2}{R_{load}} \cdot T_{clk}$
+    Gleichgewicht (eingeschwungen)  & $ \Delta I_{L_{on}} = - \Delta I_{L_{off}}$ \\ 
+    Ausgangsspannung                & $V_{out} = V_{in} \cdot \Big( 1 + \frac{t_{on}}{t_{off}} \Big)$  \\
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 
@@ -140,19 +147,46 @@ Die \textbf{Ausgangsspannung} $V_{out}$ ist \textbf{abhängig von der Last}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
-    
+    \input{tikz/buck_converter_phasen.tex}
 \end{minipage}
 
+\vspace{0.2cm}
+\textbf{Vereinfachungen:} $V_{out}$ konstant, kein Spannungsabfall über Diode und Schalter \\
+\textbf{Formeln gelten nur, wenn immer ein Strom in der Spule fliesst}
+\vspace{0.2cm}
 
-\subsection{Invertierender Wandler}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{ll}
+    \cbl{Ladephase}                 & $ \Delta I_{L_{on}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{on}$ \\
+                                    & $ I_{L_{on}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{on} + I_0 $\\ 
+    \cvt{Entladephase}              & $ \Delta I_{L_{off}} = - \frac{1}{L} \cdot V_{out} \cdot t_{off}$ \\ 
+                                    & $I_{L_{off}} = - \frac{1}{L} \cdot V_{out} \cdot t_{off} + I_0$ \\
+    Gleichgewicht (eingeschwungen)  & $ \Delta I_{L_{on}} = - \Delta I_{L_{off}}$ \\ 
+    Ausgangsspannung                & $V_{out} = V_{in} \cdot \frac{t_{on}}{T}$
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+
+\subsection{Invertierender Wandler (Buck-Boost Converter)}
 
 \begin{minipage}[c]{0.4\columnwidth}
     \input{tikz/inverting_converter.tex}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.58\columnwidth}
-    
+\begin{minipage}[c]{0.46\columnwidth}
+    \includegraphics[width=\columnwidth]{images/buck_boost_timing.png}
 \end{minipage}
+
+\textbf{Der Converter kann im buck-mode oder boost-mode betrieben werden}
+buck-mode: Duty Cycle $\frac{t_{on}}{T} < 0.5$ ; boost-mode: Duty Cycle $\frac{t_{on}}{T} > 0.5$ 
+
+\begin{tabular}{ll}
+    \cbl{Ladephase}                     & $ \Delta I_{L_{on}} = \frac{1}{L} \cdot V_{in} \cdot t_{on}$ \\
+    \cvt{Entladephase} ($V_{out} < 0$)  & $ \Delta I_{L_{off}} = \frac{1}{L} \cdot V_{out} \cdot t_{off}$ \\ 
+    Gleichgewicht (eingeschwungen)      & $ \Delta I_{L_{on}} = - \Delta I_{L_{off}}$ \\ 
+    Ausgangsspannung                    & $V_{out} = - V_{in} \cdot \frac{t_{on}}{t_{off}}$  \\
+\end{tabular}
+\renewcommand{\arraystretch}{1}
 
 
 \subsection{Flyback (Sperrwandler)}
@@ -162,5 +196,18 @@ Die \textbf{Ausgangsspannung} $V_{out}$ ist \textbf{abhängig von der Last}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
-    
+    \begin{itemize}
+        \item Ermöglicht \textbf{galvanische Trennung} zwischen Ein- und Ausgang
+        \item Transformator mit grosser Induktivität nötig zur Energiespeicherung (mit Luftspalt)
+    \end{itemize}
 \end{minipage}
+
+
+\begin{outline}
+    \1 Phase 1 (Schalter geschlossen)
+        \2 Linear steigender Strom auf Primärseite; Energie wird im Magnetfeld gespeichert
+    \1 Phase 2 (Schalter offen)
+        \2 Linear sinkender Strom auf Sekundärseite; Magnetfeld baut sich über Sekundärspule ab
+    \1 Phase 3 (LC-Schwingkreis)
+        \2C parallel zu Schalter auf Primärseite wird wirksam 
+\end{outline}
