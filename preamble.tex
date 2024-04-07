@@ -14,6 +14,8 @@
 \usepackage{outlines}               % easy nested lists
 \usepackage{tabularx}               % some nicer tables with X columns
 \usepackage{hhline}                 % double lines in tables
+\usepackage{booktabs}               % better positioned lines in tables
+\usepackage{boldline}               % bold (vertical) lines in tables
 
 
 \usepackage{amsmath}                % math symbols
@@ -38,7 +40,7 @@
 
 \usepackage{tikz}                   % needed for TikZ drawings
 \usepackage{circuitikz}             % needed for electric circuits
-
+\usepackage{pgfplots}               % needed for easy axis generation in TikZ drawings
 
 % \usepackage{listings}               % for nicer code display
 % to use nodes inside listing see: https://texample.net/tikz/examples/tikz-listings/
@@ -124,7 +126,7 @@
 \renewcommand{\arraystretch}{1.2}               % stretch table rows
 
 
-% ----------------------------------------- TIKZ SETTINGS -----------------------------------------
+% ----------------------------------- TIKZ / PGFPLOTS SETTINGS ------------------------------------
 \usetikzlibrary{arrows}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{bending}
@@ -136,6 +138,7 @@
 \usetikzlibrary{shapes}
 \usetikzlibrary{calc}
 
+\pgfplotsset{compat=1.17}	        % newest version
 
 % ------------------------------------ OTHER PACKAGE SETTINGS -------------------------------------
 
