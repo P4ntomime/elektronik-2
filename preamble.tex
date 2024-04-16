@@ -14,6 +14,8 @@
 \usepackage{outlines}               % easy nested lists
 \usepackage{tabularx}               % some nicer tables with X columns
 \usepackage{hhline}                 % double lines in tables
+\usepackage{booktabs}               % better positioned lines in tables
+\usepackage{boldline}               % bold (vertical) lines in tables
 
 
 \usepackage{amsmath}                % math symbols
@@ -37,7 +39,8 @@
 
 
 \usepackage{tikz}                   % needed for TikZ drawings
-
+\usepackage{circuitikz}             % needed for electric circuits
+\usepackage{pgfplots}               % needed for easy axis generation in TikZ drawings
 
 % \usepackage{listings}               % for nicer code display
 % to use nodes inside listing see: https://texample.net/tikz/examples/tikz-listings/
@@ -101,11 +104,11 @@
 
 % TODO: define color palette
 % color palette: https://colorkit.co/color-palette-generator/FF8552-9e22bd-404E7C-C32E15-225A28/
-\definecolor{green}{HTML}{225A28}
-\definecolor{red}{HTML}{C32E15}
-\definecolor{blue}{HTML}{404E7C}
-\definecolor{orange}{HTML}{FF8552}
-\definecolor{violet}{HTML}{9e22bd}
+\definecolor{green}{HTML}{1af430}
+\definecolor{red}{HTML}{f90d09}
+\definecolor{blue}{HTML}{093ce5}
+\definecolor{orange}{HTML}{f7730e}
+\definecolor{violet}{HTML}{a516c9}
 
 % colors for listings (code)
 % \definecolor{commentcolour}{HTML}{404E7C}
@@ -123,7 +126,7 @@
 \renewcommand{\arraystretch}{1.2}               % stretch table rows
 
 
-% ----------------------------------------- TIKZ SETTINGS -----------------------------------------
+% ----------------------------------- TIKZ / PGFPLOTS SETTINGS ------------------------------------
 \usetikzlibrary{arrows}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{bending}
@@ -135,6 +138,7 @@
 \usetikzlibrary{shapes}
 \usetikzlibrary{calc}
 
+\pgfplotsset{compat=1.17}	        % newest version
 
 % ------------------------------------ OTHER PACKAGE SETTINGS -------------------------------------
 

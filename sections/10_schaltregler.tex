@@ -1,0 +1,213 @@
+\section{Schaltregler}
+
+\textbf{SMPS} (switched-mode-power-supply) sind getaktete Systeme, deren übliche Schaltfrequenzen im Beriech von 
+$20 \, \kilo \hertz$ bis zu einigen $\mega \hertz$ liegen.
+
+
+% bei zu wenig Platz weglassen
+\subsection{Spannungswandler mit Spulen}
+
+\begin{outline}
+    \1 \textbf{Grundprinzip}
+        \2 Energie wird au einer (Spannungs-)Quelle bezogen, in verlustarmen Elementen (\textbf{Spulen}, Kondensatoren) 
+            zwischengespeichert, auf die gewünschte Spannung gebracht und stabilisiert.
+    \1 \textbf{Gemeinsamkeiten aller aufgeführten Spannungswandler mit Spulen}
+        \2 Energie wird in Magnetfeld gespeichert $E_L = \frac{1}{2} L \cdot i_L^2$
+        \2 Spannung über Spule bewirkt Änderung des Stroms \\
+            $V_L = L \cdot \frac{\diff i_L}{\diff t}$ oder $I_L= \frac{1}{L} \int V_L(t) \, \diff t + I_0  = \frac{V_L}{L} \cdot t + I_0$ 
+        \2 Zur Stabilisierung der Spannung werden Kondensatoren benötigt (potentieller LC-Schwingkreis!)
+        \2 Für die meisten Rechnungen kann man annehmen, dass:
+            \3 $V_{in}$ und $V_{out}$ \textbf{konstant} sind
+            \3 Die \textbf{Schalter ideal} sind (kein Schaltwiderstand)
+            \3 die\textbf{Dioden keinen Spannungsabfall} haben
+\end{outline}
+
+\textbf{Hinweis:} Zur Steigerung der Effizienz werden Dioden manchmal durch MOS-FETs ersetzt ('nur' $R_{DS,on}$ statt grosser
+Spannungsabfall). Die Schalter werden in der Praxis ebenfalls mit einem FET realisiert.
+
+\subsection{Energien in den Komponenten}
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{ll}
+    Energie in Spule                & $E_L = \frac{1}{2} \cdot L \cdot i_L^2$ \\
+    Energie in Kondensator          & $E_C = \frac{1}{2} \cdot C \cdot V_C^2$ \\
+    Energie in Last (pro Periode)   & $E_{load} = \frac{1}{2} P_{load} \cdot T_{clk} = \frac{1}{2} \cdot \frac{V_{out}^2}{R_{load}} \cdot T_{clk}$
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+
+\subsection{Aufwärtswandler (Boost, Step-Up Converter)}
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \input{tikz/boost_converter.tex}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.58\columnwidth}
+    \input{tikz/boost_converter_phasen.tex}
+\end{minipage}
+
+\begin{tabular}{l | l}
+    \textbf{\cbl{1. Phase}} Energie in Spule speichern  & \textbf{\cvt{2. Phase}} Entmagnetisierung \\
+    \midrule
+    \tabitem Schalter geschlossen                       & \tabitem Schalter offen \\
+    \tabitem $V_L = V_{in}$ liegt an Spule an           & \tabitem Strom sinkt, wenn $V_{out} > V_{in}$ \\
+    \tabitem $i_L$ muss nicht bei $I_0 = 0$ starten!    & \tabitem Eingeschwungener Zustand: $i_L = I_0$ \\
+\end{tabular}
+
+\vspace{0.2cm}
+In \textbf{beiden Phasen} gelten die folgenden Formeln:
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{ll}
+    \cbl{Ladephase}                 & $ \Delta I_{L_{on}} = \frac{1}{L} \cdot V_{in} \cdot t_{on}$ \\
+                                    & $ I_{L_{on}} = \frac{1}{L} \cdot V_{in} \cdot t_{on} + I_0 $\\ 
+    \cvt{Entladephase}              & $ \Delta I_{L_{off}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{off}$ \\ 
+                                    & $I_{L_{off}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{off} + I_0$ \\
+    Gleichgewicht (eingeschwungen)  & $ \Delta I_{L_{on}} = - \Delta I_{L_{off}}$ \\ 
+    Ausgangsspannung                & $V_{out} = V_{in} \cdot \Big( 1 + \frac{t_{on}}{t_{off}} \Big)$  \\
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+\vspace{0.2cm}
+Die \textbf{Ausgangsspannung} $V_{out}$ ist \textbf{abhängig von der Last} 
+\textrightarrow\ Bei hochohmiger Last kann die Ausgangsspannung sehr gross werden!
+
+\subsubsection{Synchronous Boost Converter}
+
+\begin{minipage}{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/synchronous_boost_converter.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.58\columnwidth}
+    \begin{itemize}
+        \item Diode ersetzt durch Schalter SW2
+        \item Entweder SW1 \textbf{oder} SW2 geschlossen
+        \item VSW somit immer leitend verbunden, entweder mit GND oder mit $V_{out}$ \\
+            \textrightarrow\ In Spule fliesst immer ein Strom
+    \end{itemize}
+\end{minipage}
+
+\textbf{Achtung:} Bei kleinen Lasten fliesst Strom in die Quelle zurück und die Verlustleistung in der Spule ist grösser (Drahtwiderstand)
+
+
+\subsection{Aufwärtswandler: Lückender Betrieb}
+
+\begin{minipage}{0.42\columnwidth}
+    \includegraphics[width=\columnwidth]{images/boost_lueckend.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.5\columnwidth}
+    \includegraphics[width=\columnwidth]{images/boost_lueckend_timing.png}
+\end{minipage}
+
+\begin{itemize}
+    \item Es existiert ein \cor{3. Zustand}, in welchem kein Strom durch Spule fliesst
+    \item Aus $i_L = 0$ folgt $V_L = 0$
+    \item Schalter SW offen, damit Spannung am Knoten SW $= V_{in}$ wird \textrightarrow\ Diode sperrt
+    \item Control schliesst Schalter, nachdem $V_{out} < V_{out,soll}$ ist \textrightarrow\ \textbf{Regelung} von $V_{out}$
+\end{itemize}
+
+
+\subsubsection{Regelung der Ausgangsspannung: voltage-mode control}
+
+\begin{minipage}{0.42\columnwidth}
+    \includegraphics[width=\columnwidth]{images/regelung_ausgangsspannung_voltage.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.56\columnwidth}
+    \begin{itemize}
+        \item Verstärker mit Verstäkung A0
+        \item Komparator vergleicht $V_{ERROR}$ mit $V_{RAMP}$
+        \item $V_{OUT} - V_{REF} \, \Uparrow$,  $V_{ERROR} \Uparrow$, Schalter muss 
+            länger geschlossen bleiben \textrightarrow\ grösserer Duty Cycle \textrightarrow\ $V_{OUT} \, \Uparrow$
+    \end{itemize}
+\end{minipage}
+
+
+\subsubsection{Regelung der Ausgangsspannung: current-mode control}
+
+\begin{minipage}{0.42\columnwidth}
+    \includegraphics[width=\columnwidth]{images/regelung_ausgangsspannung_current.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.56\columnwidth}
+    \begin{itemize}
+        \item Strom wird mit Shund-Widerstand durch Spannung $V_{SENSE}$ gemessen
+        \item Verstärker mit Verstäkung A0
+        \item Komparator resettiert Flip-Flop \textrightarrow\ Schalter (FET) öffnet
+        \item Häufiger zur Regelung verwendet als vorherige Schaltung
+    \end{itemize}
+\end{minipage}
+
+
+\subsection{Abwärtswandler (Buck, Step-Down Converter)}
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \input{tikz/buck_converter.tex}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.58\columnwidth}
+    \input{tikz/buck_converter_phasen.tex}
+\end{minipage}
+
+\vspace{0.2cm}
+\textbf{Vereinfachungen:} $V_{out}$ konstant, kein Spannungsabfall über Diode und Schalter \\
+\textbf{Formeln gelten nur, wenn immer ein Strom in der Spule fliesst}
+\vspace{0.2cm}
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{ll}
+    \cbl{Ladephase}                 & $ \Delta I_{L_{on}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{on}$ \\
+                                    & $ I_{L_{on}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{on} + I_0 $\\ 
+    \cvt{Entladephase}              & $ \Delta I_{L_{off}} = - \frac{1}{L} \cdot V_{out} \cdot t_{off}$ \\ 
+                                    & $I_{L_{off}} = - \frac{1}{L} \cdot V_{out} \cdot t_{off} + I_0$ \\
+    Gleichgewicht (eingeschwungen)  & $ \Delta I_{L_{on}} = - \Delta I_{L_{off}}$ \\ 
+    Ausgangsspannung                & $V_{out} = V_{in} \cdot \frac{t_{on}}{T}$
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+
+\subsection{Invertierender Wandler (Buck-Boost Converter)}
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \input{tikz/inverting_converter.tex}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.46\columnwidth}
+    \includegraphics[width=\columnwidth]{images/buck_boost_timing.png}
+\end{minipage}
+
+\textbf{Der Converter kann im buck-mode oder boost-mode betrieben werden}
+buck-mode: Duty Cycle $\frac{t_{on}}{T} < 0.5$ ; boost-mode: Duty Cycle $\frac{t_{on}}{T} > 0.5$ 
+
+\begin{tabular}{ll}
+    \cbl{Ladephase}                     & $ \Delta I_{L_{on}} = \frac{1}{L} \cdot V_{in} \cdot t_{on}$ \\
+    \cvt{Entladephase} ($V_{out} < 0$)  & $ \Delta I_{L_{off}} = \frac{1}{L} \cdot V_{out} \cdot t_{off}$ \\ 
+    Gleichgewicht (eingeschwungen)      & $ \Delta I_{L_{on}} = - \Delta I_{L_{off}}$ \\ 
+    Ausgangsspannung                    & $V_{out} = - V_{in} \cdot \frac{t_{on}}{t_{off}}$  \\
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+
+\subsection{Flyback (Sperrwandler)}
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \input{tikz/flyback.tex}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.58\columnwidth}
+    \begin{itemize}
+        \item Ermöglicht \textbf{galvanische Trennung} zwischen Ein- und Ausgang
+        \item Transformator mit grosser Induktivität nötig zur Energiespeicherung (mit Luftspalt)
+    \end{itemize}
+\end{minipage}
+
+
+\begin{outline}
+    \1 Phase 1 (Schalter geschlossen)
+        \2 Linear steigender Strom auf Primärseite; Energie wird im Magnetfeld gespeichert
+    \1 Phase 2 (Schalter offen)
+        \2 Linear sinkender Strom auf Sekundärseite; Magnetfeld baut sich über Sekundärspule ab
+    \1 Phase 3 (LC-Schwingkreis)
+        \2C parallel zu Schalter auf Primärseite wird wirksam 
+\end{outline}

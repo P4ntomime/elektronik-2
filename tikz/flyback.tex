@@ -1,0 +1,63 @@
+\begin{center}
+    \scalebox{0.5}{%
+        \begin{circuitikz}[thick]
+            %\draw[xstep=1cm, ystep=1cm, line width=0.1mm, color=lightgray] (0,0) grid (10cm,10cm);
+
+            % Einstellungen für Symbole
+            \ctikzset{
+                inductor            =   american,
+                inductors/scale     =   1.0,
+                capacitors/scale    =   0.8,
+                diodes/scale        =   0.6,
+                line width          =   0.5,
+            }
+            \def\labelOffset{0.4}
+
+            % Knoten
+            \coordinate (input) at (0,3);
+            \coordinate (P1) at (0,1);
+            \coordinate (K1) at (6,3);
+            \coordinate (K2) at (6,1);
+            \coordinate (G) at (0,0.5);
+            \coordinate (output1) at ($(K1) + (1,0)$);
+            \coordinate (output2) at ($(K2) + (1,0)$);
+
+            % Kreuzungspunkte
+            \draw (input)   node[circ]{};
+            \draw (K1)      node[circ]{};
+            \draw (K2)      node[circ]{};
+            \draw (output1)      node[circ]{};
+            \draw (output2)      node[circ]{};
+
+            % Knotenbeschriftungen
+            \node at ($(input)+(0,\labelOffset)$)  {$V_{IN}$};
+            \node at ($(output1)+(0,\labelOffset)$) {$V_{OUT}$};
+
+            %Trafo%
+            \draw (3,2) node[transformer, scale=0.95] (T) {}
+            (T.A1) node[anchor=east] {} %A1
+            (T.A2) node[anchor=east] {} %A2
+            (T.B1) node[anchor=west] {} %B1
+            (T.B2) node[anchor=west] {} %B2
+            (T.base) node{T}
+            (T.inner dot A2) node[circ]{}
+            (T.inner dot B1) node[circ]{};
+
+            %      Start Pos    Symbol type             Name        End Pos
+            \draw (G)         node[tlground                    ]  {};             % GND
+            \draw (0,1)         to [normal open switch,     l=$S$]  (T.A2) {};      % Switch
+            \draw (T.B1)        to [diode,                  l=$D$]  (K1);          % Diode
+            \draw (K1)          to [curved capacitor,       l=$C$]  (K2);           % Kondensator
+            \node at ($(K2) + (0.2,1.3)$)  {+};                                     % + Symbol am Kondensator
+
+            % Verbindungen
+            \draw (input) [short] (T.A1);
+            \draw (G) |- (0.1,1);
+            \draw (input) -- (T.A1);
+            \draw (T.B2) -- (output2);
+            \draw (K1) -- (output1);
+
+        \end{circuitikz}
+    }
+\end{center}
+

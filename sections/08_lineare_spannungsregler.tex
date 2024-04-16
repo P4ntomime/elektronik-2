@@ -60,11 +60,12 @@
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.76\columnwidth}
-    $$ \boxed{ \text{Für } I_{adj \ll I_{R1}}: \quad V_a = V_{ref} \cdot \Big( 1 + \frac{R_2}{R_1} \Big) }$$
+    % $$ \boxed{ \text{Für } I_{adj} \ll I_{R1}: \quad V_a = V_{ref} \cdot \Big( 1 + \frac{R_2}{R_1} \Big) }$$
+    $$ \boxed{ V_a = V_{ref} \cdot \Big( 1 + \frac{R_2}{R_1} \Big) + I_{adj} \cdot R_2 }$$
     \begin{itemize}
         \item Widerstände $R_1$ und $R_2$ sind \textbf{extern} beschaltet!
         \item Interne Referenz: $V_{ref} = 1.25 \, \volt$ (Bandgap)
         \item OpAmp regelt, damit $V_{R1} = V_{ref}$
-        \item Damit wird $V_{R2} = V_{ref} \frac{R_2}{R_1} + I_{adj} \cdot R_2$
+        \item Damit wird $V_{R2} = V_{ref} \cdot \frac{R_2}{R_1} + I_{adj} \cdot R_2$
     \end{itemize}
 \end{minipage}
