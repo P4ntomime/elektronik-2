@@ -15,15 +15,17 @@
     \includegraphics[width=\columnwidth]{images/tiefpass_ordnung_1.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.46\columnwidth}
+\begin{minipage}[c]{0.45\columnwidth}
     % $$ \text{UTF: } G(s) = \frac{V_{out}}{V_{in}} = \frac{\frac{1}{s \cdot C}}{R + \frac{1}{s \cdot C}} = \frac{1}{1 + s \cdot \underbrace{R \cdot C}_T} $$
     $$ \boxed{ G(s) = \frac{V_{out}}{V_{in}} = \frac{1}{1 + s \cdot \underbrace{R \cdot C}_T} } $$
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.22\columnwidth}
-    $$ \boxed{ f_{3 \, \deci \bel} = \frac{1}{2 \pi R C} } $$
+\begin{minipage}[c]{0.23\columnwidth}
+    $$ \boxed{ f_{3 \, \deci \bel} = \frac{1}{2 \pi \underbrace{R C}_T} } $$
 \end{minipage}
 
+\textbf{Hinweis:} Die Zeitkonstante $T$ entspricht immer dem Parameter vor dem $s$. 
+Beim Tiefpass 1. Ordnung entspricht dies $T = R \cdot C$
 
 \subsection{Bodeplot Tiefpassfilter 1. und 2. Ordnung}
 
