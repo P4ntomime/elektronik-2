@@ -211,3 +211,55 @@ buck-mode: Duty Cycle $\frac{t_{on}}{T} < 0.5$ ; boost-mode: Duty Cycle $\frac{t
     \1 Phase 3 (LC-Schwingkreis)
         \2C parallel zu Schalter auf Primärseite wird wirksam 
 \end{outline}
+
+
+\subsection{Power Fail Control (PFC)}
+
+\begin{minipage}[c]{0.42\columnwidth}
+    \includegraphics[width=\columnwidth]{images/pfc_schaltung.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.42\columnwidth}
+    \includegraphics[width=\columnwidth]{images/pfc.png}
+\end{minipage}
+
+\begin{minipage}[c]{0.48\columnwidth}
+    \begin{center}
+        \myul{Ohne PFC}
+    \end{center}
+    \begin{itemize}
+        \item Strom fliesst nur wenn $V_{in} > V_C$\\
+            (nur bei Spannungsmaximum) \\
+            \textrightarrow\ erzeugt Oberwellen (Blindleistung)
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    \begin{center}
+        \myul{Mit PFC}
+    \end{center}
+    \begin{itemize}
+        \item Strom soll \textbf{möglichst sinusförmig} fliessen, nicht nur beim Spannungsmaximum
+        \item Lösung: 1. Stufe mit Boost Converter
+    \end{itemize}
+\end{minipage}
+
+
+\subsection{Aufbau Modernes Netzteil}
+
+\includegraphics[width=\columnwidth]{images/modernes_netzteil.png}
+
+\begin{itemize}
+    \item 1. Stufe: Gleichrichtung und Boost Converter mit PFC
+    \item 2. Stufe: Reduktion auf Systemspannung (Bus voltage) mit Flyback-Converter
+    \item 3. Stufe: Buck Converter (ev. mehrere)
+\end{itemize}
+
+
+\subsection{Fazit Spannungswandler SMPS}
+
+\begin{itemize}
+    \item Geschaltete Spannungsregler generrieren weniger Verlustleistung als Linearregler
+    \item Ausgangsspannung geschalteter Spannungsregler hat \textbf{Rippel} der Schaltfrequenz \\
+        \textrightarrow\ Muss ev. mit Linearrregler zusätzlich stabilisiert werden
+\end{itemize}
