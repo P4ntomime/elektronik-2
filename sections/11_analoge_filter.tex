@@ -145,16 +145,25 @@ Folgende Filter erzielen durch unterschiedliche Polverteilungen unterschiedliche
 \end{minipage}
 
 
-\subsection{Tiefpass 2. Ordnung}
+\subsection{Filter 2. Ordnung}
 
 \begin{minipage}[c]{0.48\columnwidth}
+    \begin{center}
+        \myul{\textbf{Tiefpass}}
+    \end{center}
     $$ \boxed{ G(s) = \frac{V_{out}}{V_{in}} = \frac{A_0}{1 + \frac{1}{\omega_0 \cdot Q} s + \frac{1}{\omega_0^2} s^2 } } $$
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.48\columnwidth}
-    Passive RC-Filter können maximal Güte $0.5$ haben (entkoppelte reelle Pole). Filter höherer Güte benötigen entweder
-    Spulen oder \textbf{Verstärker}.
+    \begin{center}
+        \myul{\textbf{Bandpass}}
+    \end{center}
+    % CHECK gilt das für aktive und / order passive Filter?
+    $$ \boxed{ G(s) = \frac{V_{out}}{V_{in}} = \frac{A \cdot \frac{\omega_0}{Q} \cdot s}{s^2 +  \frac{\omega_0}{Q} s + \omega_0^2 } } $$
 \end{minipage}
+
+Passive RC-Filter können maximal Güte $0.5$ haben (entkoppelte reelle Pole). Filter höherer Güte benötigen entweder
+Spulen oder \textbf{Verstärker}.
 
 
 \example{UTF Tiefpass 2. Ordnung}
@@ -270,3 +279,100 @@ $$ \boxed{ G(s) = \frac{G_0}{1 + C_2 \Big( R_2 + R_2 + R_3 \frac{R_2}{R_1} \Big)
     \item Gleichungen ineinander einsetzen
     \item Umformen nach $G(s) = \frac{V_{out}}{V_{in}}$
 \end{itemize}
+
+
+% ---------------------------------------------------------------------------------------------------------------------
+% \section{Zustandsvariablen-Filter (Biquad-Filter)}
+
+\subsection{Zustandsvariablen-Filter (Biquad-Filter)}
+\label{zustandsvariablenfilter}
+
+\begin{minipage}[c]{0.6\columnwidth}
+    \includegraphics[width=\columnwidth]{images/zustandsvariablenfilter.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.38\columnwidth}
+    Mit dieser Topologie sind alle drei \textbf{Parameter} $f_0$, $Q$ und $A_0$ \textbf{frei wählbar!} \\
+    An $V_{out}$ herrscht \textbf{Tiefpass-Verhalten.}
+\end{minipage}
+
+$$ \boxed{ G(s) = \frac{- \frac{R_{fb}}{R_{in}}}{s^2 \cdot C_{i1} C_{i2} R_{fb} R_{i2} \frac{R_1}{R_2} + s \cdot C_{fb} R_{fb} + 1} } $$
+
+$$ f_0 = \frac{1}{2 \pi \sqrt{C_{i1} C_{i2} R_{fb} R_{i2} \frac{R_1}{R_2}}} \qquad Q = \frac{1}{C_{fb}} \sqrt{C_{i1} C_{i2} \frac{R_1}{R_2 R_{fb}} } 
+\qquad A_0 = - \frac{R_{fb}}{R_{in}} $$
+
+
+\subsubsection{Allgemein: FIlter mit mehreren OpAmps}
+
+Mit der Filter-Struktur aus Abschnitt ~\ref{zustandsvariablenfilter} können auch Bandpass- und Hochpass-Filter gebildet werden:
+\begin{itemize}
+    \item \textbf{Tiefpass:} Abgriff beim 3. OpAmp ($V_{out}$ gemäss Abschnitt ~\ref{zustandsvariablenfilter})
+    \item \textbf{Bandpass:} Abgriff beim 2. OpAmp (an Knoten V2)
+    \item \textbf{Hochpass:} Abgriff beim 2. OpAmp, Einspeisung am neg. Eingang des 2. OpAmps 
+\end{itemize}
+
+
+% -----------------------------------------------------------------------------------------------------------------------   
+% \section{Analyse von Filterschaltungen mit Signalflussdiagrammen}
+\subsection{Analyse von Filterschaltungen mit Signalflussdiagrammen}
+
+Aktive Filterschaltungen (mit OpAmps) können mittels Signalflussdiagrammen (SFDs) analysiert werden. Dazu wird die gesamte Schaltung
+in einzelne Komponenten aufgeteilt. Diese Komponeten werden dann mit Impedanz- bzw. Admittanzfunktionen abgebildet.
+Um die Übertragungsfunktion (UTF) der gesamten Schaltung zu erhalten, muss die \textbf{Regel von Mason} angewendet werden.
+
+% TODO: formatting..? -> gseht scheisse us
+\subsubsection{Eingangsadmittanzen / (Eingangsimpedanzen)}
+
+\textbf{Hinweis:} Es wird normalerweise mit Eingangs\textbf{admittanzen} gearbeitet!
+
+\begin{tabular}{lll}
+    \textbf{Komponente} & \textbf{Admittanz} $\bm{Y}$       & (\textbf{Impedanz} $\bm{Z}$) \\
+    \midrule
+    Widerstand $R$      & $Y_{res} = \frac{1}{R}$           & ($Z_{res} = R$  )\\
+    Kapazität $C$       & $Y_{cap} = s \cdot C$             & ($Z_{cap} = \frac{1}{s \cdot C}$)\\
+    Induktivität $L$    & $Y_{ind} = \frac{1}{s \cdot L}$   & ($Z_{ind} = s \cdot L$)
+\end{tabular}
+
+
+% TODO: formatting..? -> gseht scheisse us
+\subsubsection{OpAmp Impedanzfunktionen}
+
+\textbf{Hinweis:} Es geht um \textbf{negatives Feedback} bzw. \textbf{Gegenkopplung}
+
+\begin{tabular}{ll}
+    \textbf{Schaltung (Feedback)}       & \textbf{Impedanz} $\bm{Z}$ \\
+    \midrule
+    Widerstand $R_f$ im Feedback        & $Z_{op} = - R_f$ \\
+    Kapazität $C_f$ im Feedback         & $Z_{op} = - \frac{1}{s \cdot C_f}$ \\
+    $R_f C_f$ (parallel) im Feedback    & $Z_{op} = - \frac{R_f}{1 + s \cdot C_f \cdot R_f}$
+\end{tabular}
+
+
+\example{Summierender Verstärker}
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/summierender_verstaerker.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.58\columnwidth}
+    \begin{center}
+        \includegraphics[width=0.8\columnwidth]{images/summierender_verstaerker_sfd.png}
+    \end{center}
+    $$ V_{out} = Z_{op} \cdot (Y_0 \cdot V_{in0} + Y_1 \cdot V_{in1}) $$
+\end{minipage}
+
+$$ Y_0 = \frac{1}{R_0} \qquad Y_1 = \frac{1}{R_1} \qquad Z_{op} = - R_f $$
+
+
+\example{Aktiver Tiefpass 1. Ordnung}
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/filter_signalflussdiagramme_tiefpass_ordnung_1.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/filter_signalflussdiagramme_tiefpass_ordnung_1_sfd.png}
+    $$ Y_{in} = \frac{1}{R_1} \qquad Z_{op} = - \frac{R_f}{1 + s \cdot C_f \cdot R_f} $$
+\end{minipage}
+
+$$ G(s)= \frac{V_{out}}{V_{in}} = Y_{in} \cdot Z_{op} =- \frac{R_f}{1 + s \cdot C_f \cdot R_f} \cdot \frac{1}{R_1} $$
