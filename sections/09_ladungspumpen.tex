@@ -26,7 +26,7 @@
     \textbf{Hinweis:} $R_S$ entspricht dem Schalter-Widerstand \\
     Weiter gilt: $t^* = t - \frac{T}{2}$
 
-    \begin{tabular}{ll} % // TODO tabular spaces verkleinern
+    \begin{tabular}{ll@{}} 
         Phase PH1 (S1 geschl.)  & $I_{in} = I_C = \frac{V_{in}}{R_S} \cdot e^{\frac{t}{R_S \cdot C}} $ \\
         Phase PH2 (S2 geschl.)  & $I_C = - I_{out} = - \frac{V_{in}}{R_S} \cdot e^{\frac{t^*}{R_S \cdot C}}$ \\
         Durchschnittl. Strom    & $\overline{I_{out}} = \frac{\Delta Q}{T} =\frac{C}{T} \cdot V_{in}$ \\
@@ -50,7 +50,7 @@
 \textbf{Ausgangsspannung} $\bm{V_{out}}$ \textbf{nähert sich schrittweise exponentiell der Eingangsspannung an!} \\
 Im ersten Zyklus ist $V_{out} = 0 \, \volt$
 
-\begin{tabular}{ll} % // TODO tabular spaces verkleinern
+\begin{tabular}{ll@{}} 
     Phase PH1   & Kapazität $C_1$ wird auf $V_{in}$ geladen \\
                 & $Q_1 = C_1 \cdot V_{in}$ und $Q_2 = C_2 \cdot V_{out}$ \\
     Phase PH2   & Ladung \textbf{verschiebt} sich von $C_1$ auf $C_2$, bis beide Kapazitäten \\
@@ -110,7 +110,7 @@ Für beide Schaltungen gilt, dass der \textbf{finale Wert der Ausgangsspannung} 
 \textbf{Ausgangsspannung} $\bm{V_{out}}$ \textbf{nähert sich schrittweise exponentiell $\bm{-V_{SRC}}$ an!} \\
 Im ersten Zyklus ist $V_{out} = 0 \, \volt$
 
-\begin{tabular}{ll} % // TODO tabular spaces verkleinern
+\begin{tabular}{ll@{}} 
     Phase PH1   & Kapazität $C_1$ wird auf $V_{SRC}$ geladen \\
                 & $Q_1 = C_1 \cdot V_{SRC}$ und $Q_2 = C_2 \cdot V_{out}$ \\
     Phase PH2   & Positiver Anschluss von $C_1$ wird mit GND verbunden \\

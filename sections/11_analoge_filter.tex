@@ -1,4 +1,5 @@
 \section{Analoge Filter}
+% alternative: \section{Passive Filter}
 
 \begin{tabular}{ll@{}}
     $f_{3 \, \deci \bel}$   & Cut-Off-Frequency, Corner-Frequency \\
@@ -69,7 +70,7 @@ Daraus folgt, dass bei 2 identischen Stufen die Grenzfrequenz $f_{3 \, \deci \be
 \subsubsection{Filter 2. Ordnung mit komplexen Polen}
 
 \begin{minipage}[c]{0.6\columnwidth}
-    $$ G(s) = \frac{p_1 \cdot p_2}{(p_1 + s) \cdot (p_2 + s)} = \frac{\omega_0^2}{s^2 + \frac{s \cdot \omega_0}{Q} + \omega_0^2} $$
+    $$ G(s) = \frac{A_0 \cdot p_1 \cdot p_2}{(p_1 + s) \cdot (p_2 + s)} = \frac{A_0 \cdot \omega_0^2}{s^2 + \frac{\omega_0}{Q} s + \omega_0^2} $$
 $$ p_{1,2} = \frac{\omega_0}{2 Q} (1 \pm \sqrt{1 - 4 Q^2}) $$
 \end{minipage}
 \hfill
@@ -90,6 +91,14 @@ $$ p_{1,2} = \frac{\omega_0}{2 Q} (1 \pm \sqrt{1 - 4 Q^2}) $$
 \begin{itemize}
     \item Systeme höherer Ordnung können aufgeteilt werden in kaskadierte Teilsysteme 1. und 2. Ordnung
     \item Höhere Ordnung und komplexe Pole ermöglichen steileren Übergang zwischen Durchlass- und Sperrbereich
+\end{itemize}
+
+Folgende Filter erzielen durch unterschiedliche Polverteilungen unterschiedliches Verhalten:
+
+\begin{itemize}
+    \item \textbf{Butterworth:} Konstant im Durchlassbereich der UTF
+    \item \textbf{Bessel:} Beste Rechteckübertragung, kein Überschwingen
+    \item \textbf{Tschebyscheff:} Steilster Abfall im Sperrbereich der UTF
 \end{itemize}
 
 
@@ -131,5 +140,133 @@ $$ p_{1,2} = \frac{\omega_0}{2 Q} (1 \pm \sqrt{1 - 4 Q^2}) $$
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.48\columnwidth}
+    Komplexe Pole ($Q > 0$) führt zu Überschwingern. \\
     Bei einer Polgüte von $Q = \frac{1}{\sqrt{2}} \approx 0.7$ (\cgn{grüne Kruve}) schwingt das System am schnellsten ein!
 \end{minipage}
+
+
+\subsection{Tiefpass 2. Ordnung}
+
+\begin{minipage}[c]{0.48\columnwidth}
+    $$ \boxed{ G(s) = \frac{V_{out}}{V_{in}} = \frac{A_0}{1 + \frac{1}{\omega_0 \cdot Q} s + \frac{1}{\omega_0^2} s^2 } } $$
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    Passive RC-Filter können maximal Güte $0.5$ haben (entkoppelte reelle Pole). Filter höherer Güte benötigen entweder
+    Spulen oder \textbf{Verstärker}.
+\end{minipage}
+
+
+\example{UTF Tiefpass 2. Ordnung}
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/tiefpass_ordnung_2.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.58\columnwidth}
+    $$ A_0 = 1 \qquad \omega_0 = \frac{1}{\sqrt{C_1 C_2 R_1 R_2}} $$
+    $$ Q = \frac{\sqrt{C_1 C_2 R_1 R_2}}{C_1 R_1 + C_2 R_1 + C_2 R_2} $$
+\end{minipage}
+$$ G(s) = \frac{V_{out}}{V_{in}} = \frac{1}{1 + (C_1 R_1 + C_2 R_1 + C_2 R_2) \cdot s + C_1 C_2 R_1 R_2 \cdot s^2 } $$
+
+
+% --------------------------------------------------------------------------------------------------------------------------
+% \section{Aktive Filter} 
+
+\subsection{Sallen-Key-Filter (Einfachmitkopplung)}
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/sallen_key.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.58\columnwidth}
+    $$ \text{OpAmp:} \quad  V_{out} = G_0 \cdot V_3 = \Big(1 + \frac{R_A}{R_B} \Big) \cdot V_3 $$
+    $$ \omega_0 = \frac{1}{\sqrt{C_1 C_2 R_1 R_2}} $$
+    $$ Q = \frac{\sqrt{C_1 C_2 R_1 R_2}}{ C_2 (R_1 + R_2) + C_1 R_1 \cdot (1 - G_0)} $$
+\end{minipage}
+
+$$ \boxed{ G(s) = \frac{G_0}{ C_1 C_2 R_1 R_2 \cdot s^2 + [ C_2 (R_1 + R_2) + C_1 R_1 (1 - G_0) ] \cdot s + 1} } $$
+
+\textbf{Stromgleichungen:}
+\begin{align*}
+    \text{V2:} \quad 0 &= (V_2 - V_{in}) \frac{1}{R_1} + (V_2 - V_3) \frac{1}{R_2} + (V_2 - V_{out}) \cdot s \cdot C_1  \\
+    \text{V3:} \quad 0 &= (V_3 - V_2) \frac{1}{R_2} + V_3  \cdot s \cdot C_2 
+\end{align*}
+
+
+\subsubsection{Sallen-Key-Filter bei hohen Frequnezen}
+
+\begin{minipage}[c]{0.4\columnwidth}  
+    \includegraphics[width=\columnwidth]{images/sallen_key_hohe_frequenzen.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.58\columnwidth}
+    $$ \boxed{ \frac{V_{out}}{V_{in}} = \approx \frac{r_{OL}}{R_1 + r_{OL}} }$$
+    $r_{OL}$ ist der OpAmp open-loop Ausgangswiderstand (bei hohen Frequenzen $\approx 100 \, \ohm$)
+\end{minipage}
+
+\begin{itemize}
+    \item Dämpfung ist limitiert auf obigen Spannungsteiler
+        \textrightarrow\ Sallen-Key-Filter sind nicht geeignet für Systeme mit hohen Frequenzanteilen z.B. PWM-DAC
+\end{itemize}
+
+
+\subsection{Multiple-Feedback-Struktur}
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/aktive_filter_multiple_feedback.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.58\columnwidth}
+    $$ \text{OpAmp:} \quad  G_0 = -\frac{R_2}{R_1} $$
+    $$ Q = \frac{\sqrt{C_1 C_2 R_1 R_2}}{ C_2 \Big( R_2 + R_2 + R_3 \frac{R_2}{R_1} \Big)} $$
+\end{minipage}
+
+$$ \boxed{ G(s) = \frac{G_0}{1 + C_2 \Big( R_2 + R_2 + R_3 \frac{R_2}{R_1} \Big) \cdot s + C_1 C_2 R_2 R_3 \cdot s^2 }}$$
+
+\textbf{Stromgleichungen:}
+\begin{align*}
+    \text{V2:} \quad 0 &= (V_2 - V_{in}) \frac{1}{R_1} + (V_2 - V_{out}) \frac{1}{R_2} + (V_2 - V_3) \frac{1}{R_3} + V_2 \cdot s \cdot C_1  \\
+    \text{V3:} \quad 0 &= (V_3 - V_2) \frac{1}{R_3} + (V_3 - V_{out})  \cdot s \cdot C_2 
+\end{align*}
+
+\subsection{Sallen-Key vs. Multiple-Feedback Struktur}
+
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{center}
+        \myul{\textbf{Sallen-Key}}
+    \end{center}
+    \begin{outline}
+        \1 Nicht-invertierend
+        \1 $Q$ sensitiver auf Toleranzen
+        \1 Vorwärtspfad für hohe Frequenzen
+        \1 Noise-Gain: $A$
+        \1 Eher für 
+            \2 Hochpass
+            \2 kleine Verstärkungen
+    \end{outline}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{center}
+        \myul{\textbf{Multiple-Feedback}}
+    \end{center}
+    \begin{outline}
+        \1 Invertierend
+        \1 $f_g$ sensitiver auf Toleranzen 
+        \\
+        \1 Noise-Gain: $A+1$
+        \1 Eher für 
+            \2 Tiefpass, Bandpass
+            \2 grössere Verstärkungen
+    \end{outline}
+\end{minipage}
+
+
+% CHECK Wohin mit dieser subsection?
+\subsection{Vorgehen: UTF aus OPV-Filterschaltung ermitteln}
+\begin{itemize}
+    \item Stromgleichungen (Knotengleichungen) aufstellen
+    \item Gleichungen ineinander einsetzen
+    \item Umformen nach $G(s) = \frac{V_{out}}{V_{in}}$
+\end{itemize}
