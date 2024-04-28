@@ -376,3 +376,24 @@ $$ Y_0 = \frac{1}{R_0} \qquad Y_1 = \frac{1}{R_1} \qquad Z_{op} = - R_f $$
 \end{minipage}
 
 $$ G(s)= \frac{V_{out}}{V_{in}} = Y_{in} \cdot Z_{op} =- \frac{R_f}{1 + s \cdot C_f \cdot R_f} \cdot \frac{1}{R_1} $$
+
+
+\subsection{Allgemein einsezbare Biquads (Zustandsvariablenfilter)}
+
+\subsection{Regel von Mason (vereinfacht)}
+
+$$ \text{UTF:} \quad G(s) = \frac{V_{out}}{V_{in}} = \frac{\text{Produkt der Transmittanzen im Vorwärtspfad}}{1 - \text{Summe aller Schleifentransmittanzen}} $$
+
+
+\example{Analyse Bandpass mittels SFD und Regel von Mason}
+
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/signalflussdiagramme_bandpass_schaltung.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/signalflussdiagramme_bandpass_blockschaltbild.png}
+\end{minipage}
+
+$$ G(s) = \frac{V_{out}}{V_{in}} = \frac{Y_{in} \cdot Z_{int1} \cdot Y_i \cdot Z_i \cdot Y_{r2} \cdot Z_{int2} }
+    {1 - (Y_{fb1} - Y_{fb2}) \cdot Z_{int1} \cdot Y_i \cdot Z_i \cdot Y_{r2} \cdot Z_{int2} } $$
