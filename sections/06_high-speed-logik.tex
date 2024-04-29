@@ -9,7 +9,7 @@
 
 \subsection{Emitter Coupled Logic (ECL)}
 
-\subsubsection{Emitter Coupled Logic (ECL)}
+% \subsubsection{Emitter Coupled Logic (ECL)} % FIXME: remove this subsubsection heading?
 
 \begin{minipage}[c]{0.3\columnwidth}
     \includegraphics[width=\columnwidth]{images/ECL_logikpegel.png}
@@ -18,8 +18,8 @@
 \begin{minipage}[c]{0.68\columnwidth}
     \begin{itemize}
         \item 2 Familien: $10 \kilo$ (langsamer) und $100 \kilo$ (schneller)
-        \item Positive Speisung: $V_{CC} = 0 \, \volt$
-        \item Negative Speisung: $V_{EE} = -4.5 \, \volt$ / $V_{EE} = -5.2 \, \volt$ 
+        \item Positive Speisung: $V_{\rm CC} = 0 \, \volt$
+        \item Negative Speisung: $V_{\rm EE} = -4.5 \, \volt$ / $V_{\rm EE} = -5.2 \, \volt$ 
         \item ICs werden warm ($40 \, \milli \watt$ pro Gatter)
     \end{itemize}
 \end{minipage}
@@ -30,11 +30,9 @@
 \hfill
 \begin{minipage}[c]{0.72\columnwidth}
    \begin{itemize}
-    \item Eingangssignal $V_I$ wird mit fixer Referenz $V_R$ verglichen
-    \item Von $V_R - 100 \, \milli \volt$ bis $V_R + 100 \, \milli \volt$ \textbf{kippt Ausgnagsspannung} von 
-        $V_{CC}$ auf $V_{CC} - R_C \cdot I_C$
-    \item \textbf{Differentieller Spannungshub} der Ausgänge: \\
-        $V_{diff} = \pm R_C \cdot I_C$
+    \item Eingangssignal $V_{\rm I}$ wird mit fixer Referenz $V_{\rm R}$ verglichen
+    \item Von $V_{\rm R} - 100 \, \milli \volt$ bis $V_{\rm R} + 100 \, \milli \volt$ \textbf{kippt Ausgangsspannung} von $V_{\rm CC}$ auf $V_{\rm CC} - R_{\rm C} \cdot I_{\rm C}$
+    \item \textbf{Differentieller Spannungshub} der Ausgänge:\\ $V_{\rm diff} = \pm R_{\rm C} \cdot I_{\rm C}$
     \item Spannungspegel \textbf{nicht} kompatibel zu CMOS / TTL
    \end{itemize}
 \end{minipage}
@@ -49,9 +47,9 @@
 \hfill
 \begin{minipage}[c]{0.72\columnwidth}
    \begin{itemize}
-    \item Positive Speisung: $V_{CC} = 5 \, \volt$
-    \item Negative Speisung: $V_{EE} = 0 \, \volt$
-    \item Ausgangsbeschaltung mit $50 \, \ohm$ Abschluss zu $V_{CC} - 2 \, \volt$ \\
+    \item Positive Speisung: $V_{\rm CC} = 5 \, \volt$
+    \item Negative Speisung: $V_{\rm EE} = 0 \, \volt$
+    \item Ausgangsbeschaltung mit $50 \, \ohm$ Abschluss zu $V_{\rm CC} - 2 \, \volt$ \\
         \textrightarrow\ Reduktion der Reflexionen!
     \item Spannungspegel sind kompatibel zu CMOS / TTL
    \end{itemize}
@@ -61,8 +59,8 @@
 \subsubsection{Low Voltage Positive ECL (LVPECL)}
 
 \begin{itemize}
-    \item Speisespannungen:  $V_{CC} = 3.3 \, \volt$; $V_{EE} = 0 \, \volt$
-    \item Weniger Leisutng als $5 \, \volt$ Logik; leichter anpassbar an $3.3 \, \volt$ Logik
+    \item Speisespannungen:  $V_{\rm CC} = 3.3 \, \volt$; $V_{\rm EE} = 0 \, \volt$
+    \item Weniger Leistung als $5 \, \volt$ Logik; leichter anpassbar an $3.3 \, \volt$ Logik
 \end{itemize}
 
 
@@ -74,10 +72,10 @@
 \hfill
 \begin{minipage}[c]{0.72\columnwidth}
    \begin{itemize}
-    \item Terminierung am Eingang der Folgestufe gegen $V_{CC}$
-    \item Äquivalenter Widerstand: $R_{C_{eq}} = 50 \, \ohm \, || \, 50 \, \ohm = 25 \, \ohm$
+    \item Terminierung am Eingang der Folgestufe gegen $V_{\rm CC}$
+    \item Äquivalenter Widerstand: $R_{\rm C_{\rm eq}} = 50 \, \ohm \, || \, 50 \, \ohm = 25 \, \ohm$
     
-    $$ \boxed{ \text{Differentielle Spannung: } V_{diff} = \pm R_{C_{eq}} \cdot I_q }$$
+    $$ \boxed{ \text{Differentielle Spannung: } V_{\rm diff} = \pm R_{\rm C_{\rm eq}} \cdot I_q }$$
    \end{itemize}
 \end{minipage}
 
@@ -86,11 +84,11 @@
 
 \begin{minipage}[t]{0.55\columnwidth}
     \begin{center}
-        \textbf{ECL}
+        \myul{\textbf{ECL}}
     \end{center}
 
     \begin{itemize}
-        \item Diff-Amp mit Transistor-Bufffer; Ausgang am Emitter 
+        \item Diff-Amp mit Transistor-Buffer; Ausgang am Emitter 
         \item Single-ended Input (2. Eingang auf fixer Spannung)
         \item Single-ended Output (z.T. auch differentiell)
     \end{itemize}
@@ -98,7 +96,7 @@
 \hfill
 \begin{minipage}[t]{0.43\columnwidth}
     \begin{center}
-        \textbf{CML}
+        \myul{\textbf{CML}}
     \end{center}
 
     \begin{itemize}
@@ -129,5 +127,4 @@
         \item[-] aufwändiges PCB-Layout wegen angepassten Leistungsimpedanzen nötig 
     \end{itemize}
 \end{minipage}
-
 
