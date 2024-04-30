@@ -1,15 +1,15 @@
 \section{Schaltregler}
 
-\textbf{SMPS} (switched-mode-power-supply) sind getaktete Systeme, deren übliche Schaltfrequenzen im Beriech von 
+\textbf{SMPS} (switched-mode-power-supply) sind getaktete Systeme, deren übliche Schaltfrequenzen im Bereich von 
 $20 \, \kilo \hertz$ bis zu einigen $\mega \hertz$ liegen.
 
 
 % bei zu wenig Platz weglassen
 \subsection{Spannungswandler mit Spulen}
 
-\begin{outline}
+\begin{outline} % TODO: change 3rd level star to hollow circle
     \1 \textbf{Grundprinzip}
-        \2 Energie wird au einer (Spannungs-)Quelle bezogen, in verlustarmen Elementen (\textbf{Spulen}, Kondensatoren) 
+        \2 Energie wird aus einer (Spannungs-)Quelle bezogen, in verlustarmen Elementen (\textbf{Spulen}, Kondensatoren) 
             zwischengespeichert, auf die gewünschte Spannung gebracht und stabilisiert.
     \1 \textbf{Gemeinsamkeiten aller aufgeführten Spannungswandler mit Spulen}
         \2 Energie wird in Magnetfeld gespeichert $E_L = \frac{1}{2} L \cdot i_L^2$
@@ -17,12 +17,12 @@ $20 \, \kilo \hertz$ bis zu einigen $\mega \hertz$ liegen.
             $V_L = L \cdot \frac{\diff i_L}{\diff t}$ oder $I_L= \frac{1}{L} \int V_L(t) \, \diff t + I_0  = \frac{V_L}{L} \cdot t + I_0$ 
         \2 Zur Stabilisierung der Spannung werden Kondensatoren benötigt (potentieller LC-Schwingkreis!)
         \2 Für die meisten Rechnungen kann man annehmen, dass:
-            \3 $V_{in}$ und $V_{out}$ \textbf{konstant} sind
+            \3 $V_{\rm in}$ und $V_{\rm out}$ \textbf{konstant} sind
             \3 Die \textbf{Schalter ideal} sind (kein Schaltwiderstand)
-            \3 die\textbf{Dioden keinen Spannungsabfall} haben
+            \3 Die \textbf{Dioden keinen Spannungsabfall} haben
 \end{outline}
 
-\textbf{Hinweis:} Zur Steigerung der Effizienz werden Dioden manchmal durch MOS-FETs ersetzt ('nur' $R_{DS,on}$ statt grosser
+\textbf{Hinweis:} Zur Steigerung der Effizienz werden Dioden manchmal durch MOS-FETs ersetzt ('nur' $R_{\rm DS,on}$ statt grosser
 Spannungsabfall). Die Schalter werden in der Praxis ebenfalls mit einem FET realisiert.
 
 \subsection{Energien in den Komponenten}
@@ -31,7 +31,7 @@ Spannungsabfall). Die Schalter werden in der Praxis ebenfalls mit einem FET real
 \begin{tabular}{ll}
     Energie in Spule                & $E_L = \frac{1}{2} \cdot L \cdot i_L^2$ \\
     Energie in Kondensator          & $E_C = \frac{1}{2} \cdot C \cdot V_C^2$ \\
-    Energie in Last (pro Periode)   & $E_{load} = \frac{1}{2} P_{load} \cdot T_{clk} = \frac{1}{2} \cdot \frac{V_{out}^2}{R_{load}} \cdot T_{clk}$
+    Energie in Last (pro Periode)   & $E_{\rm load} = \frac{1}{2} P_{\rm load} \cdot T_{\rm clk} = \frac{1}{2} \cdot \frac{V_{\rm out}^2}{R_{\rm load}} \cdot T_{\rm clk}$
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 
@@ -50,7 +50,7 @@ Spannungsabfall). Die Schalter werden in der Praxis ebenfalls mit einem FET real
     \textbf{\cbl{1. Phase}} Energie in Spule speichern  & \textbf{\cvt{2. Phase}} Entmagnetisierung \\
     \midrule
     \tabitem Schalter geschlossen                       & \tabitem Schalter offen \\
-    \tabitem $V_L = V_{in}$ liegt an Spule an           & \tabitem Strom sinkt, wenn $V_{out} > V_{in}$ \\
+    \tabitem $V_L = V_{\rm in}$ liegt an Spule an           & \tabitem Strom sinkt, wenn $V_{\rm out} > V_{\rm in}$ \\
     \tabitem $i_L$ muss nicht bei $I_0 = 0$ starten!    & \tabitem Eingeschwungener Zustand: $i_L = I_0$ \\
 \end{tabular}
 
@@ -59,17 +59,17 @@ In \textbf{beiden Phasen} gelten die folgenden Formeln:
 
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{ll}
-    \cbl{Ladephase}                 & $ \Delta I_{L_{on}} = \frac{1}{L} \cdot V_{in} \cdot t_{on}$ \\
-                                    & $ I_{L_{on}} = \frac{1}{L} \cdot V_{in} \cdot t_{on} + I_0 $\\ 
-    \cvt{Entladephase}              & $ \Delta I_{L_{off}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{off}$ \\ 
-                                    & $I_{L_{off}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{off} + I_0$ \\
-    Gleichgewicht (eingeschwungen)  & $ \Delta I_{L_{on}} = - \Delta I_{L_{off}}$ \\ 
-    Ausgangsspannung                & $V_{out} = V_{in} \cdot \Big( 1 + \frac{t_{on}}{t_{off}} \Big)$  \\
+    \cbl{Ladephase}                 & $ \Delta I_{L_{\rm on}} = \frac{1}{L} \cdot V_{\rm in} \cdot t_{\rm on}$ \\
+                                    & $ I_{L_{\rm on}} = \frac{1}{L} \cdot V_{\rm in} \cdot t_{\rm on} + I_0 $\\ 
+    \cvt{Entladephase}              & $ \Delta I_{L_{\rm off}} = \frac{1}{L} \cdot (V_{\rm in}- V_{\rm out}) \cdot t_{\rm off}$ \\ 
+                                    & $I_{L_{\rm off}} = \frac{1}{L} \cdot (V_{\rm in}- V_{\rm out}) \cdot t_{\rm off} + I_0$ \\
+    Gleichgewicht (eingeschwungen)  & $ \Delta I_{L_{\rm on}} = - \Delta I_{L_{\rm off}}$ \\ 
+    Ausgangsspannung                & $V_{\rm out} = V_{\rm in} \cdot \left\lgroup 1 + \frac{t_{\rm on}}{t_{\rm off}} \right\rgroup$  \\
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 
 \vspace{0.2cm}
-Die \textbf{Ausgangsspannung} $V_{out}$ ist \textbf{abhängig von der Last} 
+Die \textbf{Ausgangsspannung} $V_{\rm out}$ ist \textbf{abhängig von der Last} 
 \textrightarrow\ Bei hochohmiger Last kann die Ausgangsspannung sehr gross werden!
 
 \subsubsection{Synchronous Boost Converter}
@@ -82,7 +82,7 @@ Die \textbf{Ausgangsspannung} $V_{out}$ ist \textbf{abhängig von der Last}
     \begin{itemize}
         \item Diode ersetzt durch Schalter SW2
         \item Entweder SW1 \textbf{oder} SW2 geschlossen
-        \item VSW somit immer leitend verbunden, entweder mit GND oder mit $V_{out}$ \\
+        \item VSW somit immer leitend verbunden, entweder mit GND oder mit $V_{\rm out}$ \\
             \textrightarrow\ In Spule fliesst immer ein Strom
     \end{itemize}
 \end{minipage}
@@ -103,8 +103,8 @@ Die \textbf{Ausgangsspannung} $V_{out}$ ist \textbf{abhängig von der Last}
 \begin{itemize}
     \item Es existiert ein \cor{3. Zustand}, in welchem kein Strom durch Spule fliesst
     \item Aus $i_L = 0$ folgt $V_L = 0$
-    \item Schalter SW offen, damit Spannung am Knoten SW $= V_{in}$ wird \textrightarrow\ Diode sperrt
-    \item Control schliesst Schalter, nachdem $V_{out} < V_{out,soll}$ ist \textrightarrow\ \textbf{Regelung} von $V_{out}$
+    \item Schalter SW offen, damit Spannung am Knoten SW $= V_{\rm in}$ wird \textrightarrow\ Diode sperrt
+    \item Control schliesst Schalter, nachdem $V_{\rm out} < V_{\rm out,soll}$ ist \textrightarrow\ \textbf{Regelung} von $V_{\rm out}$
 \end{itemize}
 
 
@@ -117,9 +117,10 @@ Die \textbf{Ausgangsspannung} $V_{out}$ ist \textbf{abhängig von der Last}
 \begin{minipage}{0.56\columnwidth}
     \begin{itemize}
         \item Verstärker mit Verstäkung A0
-        \item Komparator vergleicht $V_{ERROR}$ mit $V_{RAMP}$
-        \item $V_{OUT} - V_{REF} \, \Uparrow$,  $V_{ERROR} \Uparrow$, Schalter muss 
-            länger geschlossen bleiben \textrightarrow\ grösserer Duty Cycle \textrightarrow\ $V_{OUT} \, \Uparrow$
+        \item Komparator vergleicht $V_{\rm ERROR}$ mit $V_{\rm RAMP}$
+        \item $V_{\rm OUT} - V_{\rm REF} \, \Uparrow$,  $V_{\rm ERROR} \Uparrow$, Schalter muss 
+            länger geschlossen bleiben\\
+            \textrightarrow\ grösserer Duty Cycle \textrightarrow\ $V_{\rm OUT} \, \Uparrow$
     \end{itemize}
 \end{minipage}
 
@@ -132,9 +133,10 @@ Die \textbf{Ausgangsspannung} $V_{out}$ ist \textbf{abhängig von der Last}
 \hfill
 \begin{minipage}{0.56\columnwidth}
     \begin{itemize}
-        \item Strom wird mit Shund-Widerstand durch Spannung $V_{SENSE}$ gemessen
-        \item Verstärker mit Verstäkung A0
-        \item Komparator resettiert Flip-Flop \textrightarrow\ Schalter (FET) öffnet
+        \item Strom wird mit Shunt-Widerstand durch Spannung $V_{\rm SENSE}$ gemessen
+        \item Verstärker mit Verstäkung A0 % TODO: check if this needs to be math mode
+        \item Komparator resetted Flip-Flop\\
+        \textrightarrow\ Schalter (FET) öffnet
         \item Häufiger zur Regelung verwendet als vorherige Schaltung
     \end{itemize}
 \end{minipage}
@@ -151,18 +153,18 @@ Die \textbf{Ausgangsspannung} $V_{out}$ ist \textbf{abhängig von der Last}
 \end{minipage}
 
 \vspace{0.2cm}
-\textbf{Vereinfachungen:} $V_{out}$ konstant, kein Spannungsabfall über Diode und Schalter \\
+\textbf{Vereinfachungen:} $V_{\rm out}$ konstant, kein Spannungsabfall über Diode und Schalter \\
 \textbf{Formeln gelten nur, wenn immer ein Strom in der Spule fliesst}
 \vspace{0.2cm}
 
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{ll}
-    \cbl{Ladephase}                 & $ \Delta I_{L_{on}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{on}$ \\
-                                    & $ I_{L_{on}} = \frac{1}{L} \cdot (V_{in}- V_{out}) \cdot t_{on} + I_0 $\\ 
-    \cvt{Entladephase}              & $ \Delta I_{L_{off}} = - \frac{1}{L} \cdot V_{out} \cdot t_{off}$ \\ 
-                                    & $I_{L_{off}} = - \frac{1}{L} \cdot V_{out} \cdot t_{off} + I_0$ \\
-    Gleichgewicht (eingeschwungen)  & $ \Delta I_{L_{on}} = - \Delta I_{L_{off}}$ \\ 
-    Ausgangsspannung                & $V_{out} = V_{in} \cdot \frac{t_{on}}{T}$
+    \cbl{Ladephase}                 & $ \Delta I_{L_{\rm on}} = \frac{1}{L} \cdot (V_{\rm in}- V_{\rm out}) \cdot t_{\rm on}$ \\
+                                    & $ I_{L_{\rm on}} = \frac{1}{L} \cdot (V_{\rm in}- V_{\rm out}) \cdot t_{\rm on} + I_0 $\\ 
+    \cvt{Entladephase}              & $ \Delta I_{L_{\rm off}} = - \frac{1}{L} \cdot V_{\rm out} \cdot t_{\rm off}$ \\ 
+                                    & $I_{L_{\rm off}} = - \frac{1}{L} \cdot V_{\rm out} \cdot t_{\rm off} + I_0$ \\
+    Gleichgewicht (eingeschwungen)  & $ \Delta I_{L_{\rm on}} = - \Delta I_{L_{\rm off}}$ \\ 
+    Ausgangsspannung                & $V_{\rm out} = V_{\rm in} \cdot \frac{t_{\rm on}}{T}$
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 
@@ -178,13 +180,13 @@ Die \textbf{Ausgangsspannung} $V_{out}$ ist \textbf{abhängig von der Last}
 \end{minipage}
 
 \textbf{Der Converter kann im buck-mode oder boost-mode betrieben werden}
-buck-mode: Duty Cycle $\frac{t_{on}}{T} < 0.5$ ; boost-mode: Duty Cycle $\frac{t_{on}}{T} > 0.5$ 
+buck-mode: Duty Cycle $\frac{t_{\rm on}}{T} < 0.5$ ; boost-mode: Duty Cycle $\frac{t_{\rm on}}{T} > 0.5$ 
 
 \begin{tabular}{ll}
-    \cbl{Ladephase}                     & $ \Delta I_{L_{on}} = \frac{1}{L} \cdot V_{in} \cdot t_{on}$ \\
-    \cvt{Entladephase} ($V_{out} < 0$)  & $ \Delta I_{L_{off}} = \frac{1}{L} \cdot V_{out} \cdot t_{off}$ \\ 
-    Gleichgewicht (eingeschwungen)      & $ \Delta I_{L_{on}} = - \Delta I_{L_{off}}$ \\ 
-    Ausgangsspannung                    & $V_{out} = - V_{in} \cdot \frac{t_{on}}{t_{off}}$  \\
+    \cbl{Ladephase}                         & $ \Delta I_{L_{\rm on}} = \frac{1}{L} \cdot V_{\rm in} \cdot t_{\rm on}$ \\
+    \cvt{Entladephase} ($V_{\rm out} < 0$)  & $ \Delta I_{L_{\rm off}} = \frac{1}{L} \cdot V_{\rm out} \cdot t_{\rm off}$ \\ 
+    Gleichgewicht (eingeschwungen)          & $ \Delta I_{L_{\rm on}} = - \Delta I_{L_{\rm off}}$ \\ 
+    Ausgangsspannung                        & $V_{\rm out} = - V_{\rm in} \cdot \frac{t_{\rm on}}{t_{\rm off}}$  \\
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 
@@ -228,13 +230,14 @@ buck-mode: Duty Cycle $\frac{t_{on}}{T} < 0.5$ ; boost-mode: Duty Cycle $\frac{t
         \myul{Ohne PFC}
     \end{center}
     \begin{itemize}
-        \item Strom fliesst nur wenn $V_{in} > V_C$\\
+        \item Strom fliesst nur wenn $V_{\rm in} > V_C$\\
             (nur bei Spannungsmaximum) \\
             \textrightarrow\ erzeugt Oberwellen (Blindleistung)
     \end{itemize}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.48\columnwidth}
+    \raggedright%
     \begin{center}
         \myul{Mit PFC}
     \end{center}
@@ -259,7 +262,8 @@ buck-mode: Duty Cycle $\frac{t_{on}}{T} < 0.5$ ; boost-mode: Duty Cycle $\frac{t
 \subsection{Fazit Spannungswandler SMPS}
 
 \begin{itemize}
-    \item Geschaltete Spannungsregler generrieren weniger Verlustleistung als Linearregler
+    \item Geschaltete Spannungsregler generieren weniger Verlustleistung als Linearregler
     \item Ausgangsspannung geschalteter Spannungsregler hat \textbf{Rippel} der Schaltfrequenz \\
-        \textrightarrow\ Muss ev. mit Linearrregler zusätzlich stabilisiert werden
+        \textrightarrow\ Muss ev. mit Linearregler zusätzlich stabilisiert werden
 \end{itemize}
+

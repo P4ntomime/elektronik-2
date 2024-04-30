@@ -5,7 +5,7 @@
 \begin{itemize}
     \item Leitungen haben Widerstände, Kapazitäten und Induktivitäten \textrightarrow\ RLC-Netzwerke
     \item \textbf{Fortpflanzungsgeschwindigkeit Signal:} $v = 10 - 20 \, \centi \meter / \nano \second$ \\
-        (Lichtgeschwindigkeit: $c = 0 \, \centi \meter / \nano \second$)
+        (Lichtgeschwindigkeit: $c = 0 \, \centi \meter / \nano \second$) % TODO: 0 correct?
     \item Ev. \textbf{Impedanzanpassungen} zur Verhinderung von \textbf{Reflexionen} nötig (meistens $50 \, \ohm$)
     \item CMOS-Logik: tiefen Quellenwiderstand, hohen Eingangswiderstand \\
         \textrightarrow\ Nicht geeignet zur Datenübertragung über 'längere Strecken'
@@ -34,12 +34,12 @@ Wenn nichts anderes bekannt gilt: $T_r = \frac{1}{10} \cdot T$
 \subsubsection{Reflexionen}
 
 \begin{minipage}[c]{0.3\columnwidth}
-    $$ \boxed{ l > \frac{1 \cdot 10^7 \, \frac{\meter}{\second} }{f_{max}} } $$
-\end{minipage}
-\hfill
+    $$ \boxed{ l > \frac{1 \cdot 10^7 \, \frac{\meter}{\second} }{f_{\rm max}} } $$
+\end{minipage}\hfill
 \begin{minipage}[c]{0.68\columnwidth}
     \begin{tabular}{ll}
-        $f_{max}$   & Maximal enthaltene Frequenz im Signal \\
+        $f_{\rm max}$   & Maximal enthaltene Frequenz im Signal \\
         $l$         & Länge der Leitung 
     \end{tabular}
 \end{minipage}
+

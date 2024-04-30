@@ -20,6 +20,7 @@
 
 \usepackage{amsmath}                % math symbols
 \usepackage{amssymb}                % more math symbols
+\usepackage{txfonts}                % additional math fonts
 \usepackage[squaren]{SIunits}       % SI-units
 \usepackage{bm}                     % bold math symbols
 \usepackage{trfsigns}               % needed for "Laplace" symbol (Korrespondenz)
@@ -34,7 +35,7 @@
 
 
 \usepackage{tcolorbox}              % colored boxes
-\usepackage{contour}                % contour for text (used in custom underline command)
+\usepackage[outline]{contour}       % contour for text (used in custom underline command)
 \usepackage[normalem]{ulem}         % custom underline (used in custom underline command)
 
 
@@ -125,6 +126,11 @@
 
 \renewcommand{\arraystretch}{1.2}               % stretch table rows
 
+% new environment for centered tabulars
+\NewDocumentEnvironment{ctabular}{m}
+                       {\center\tabular{#1}}
+                       {\endtabular\endcenter}
+
 
 % ----------------------------------- TIKZ / PGFPLOTS SETTINGS ------------------------------------
 \usetikzlibrary{arrows}
@@ -160,7 +166,7 @@
 % custom underline command for exclusions on lowercase letters such as g, j, p, q, y
 \newcommand{\myul}[1]{%
     \uline{\phantom{#1}}%
-    \llap{\contour*{white}{#1}}%
+    \llap{\contour{white}{#1}}%
 }
 
 

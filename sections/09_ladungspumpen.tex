@@ -6,10 +6,9 @@
             \textrightarrow\ Ladung wird umverteilt!
         \item Ladungspumpen sind billige, effiziente Spannungswandler (Wirkungsgrad $> 99 \, \%$ möglich)
     \end{itemize}
-    
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.25\columnwidth}
+\begin{minipage}[b]{0.25\columnwidth}
     $$ \boxed{ Q = C \cdot V} $$
 \end{minipage}
 
@@ -23,16 +22,16 @@
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.7\columnwidth}
-    \textbf{Hinweis:} $R_S$ entspricht dem Schalter-Widerstand \\
+    \textbf{Hinweis:} $R_{\rm S}$ entspricht dem Schalter-Widerstand \\
     Weiter gilt: $t^* = t - \frac{T}{2}$
 
-    \begin{tabular}{ll} % // TODO tabular spaces verkleinern
-        Phase PH1 (S1 geschl.)  & $I_{in} = I_C = \frac{V_{in}}{R_S} \cdot e^{\frac{t}{R_S \cdot C}} $ \\
-        Phase PH2 (S2 geschl.)  & $I_C = - I_{out} = - \frac{V_{in}}{R_S} \cdot e^{\frac{t^*}{R_S \cdot C}}$ \\
-        Durchschnittl. Strom    & $\overline{I_{out}} = \frac{\Delta Q}{T} =\frac{C}{T} \cdot V_{in}$ \\
+    \begin{tabular}{ll@{}} 
+        Phase PH1 (S1 geschl.)  & $I_{\rm in} = I_{\rm C} = \frac{V_{\rm in}}{R_{\rm S}} \cdot e^{\frac{t}{R_{\rm S} \cdot C}} $ \\
+        Phase PH2 (S2 geschl.)  & $I_C = - I_{\rm out} = - \frac{V_{\rm in}}{R_{\rm S}} \cdot e^{\frac{t^*}{R_{\rm S} \cdot C}}$ \\
+        Durchschnittl. Strom    & $\overline{I_{\rm out}} = \frac{\Delta Q}{T} =\frac{C}{T} \cdot V_{\rm in}$ \\
     \end{tabular}
 
-    Der 'switched capacitor' $C$ hat einen \textbf{äquivalenten Widerstand} $R_{eq} = \frac{T}{C} = \frac{1}{f \cdot C}$
+    Der 'switched capacitor' $C$ hat einen \textbf{äquivalenten Widerstand} $R_{\rm eq} = \frac{T}{C} = \frac{1}{f \cdot C}$
 \end{minipage}
 
 
@@ -47,17 +46,16 @@
 \end{minipage}
 
 \vspace{0.2cm}
-\textbf{Ausgangsspannung} $\bm{V_{out}}$ \textbf{nähert sich schrittweise exponentiell der Eingangsspannung an!} \\
-Im ersten Zyklus ist $V_{out} = 0 \, \volt$
+\textbf{Ausgangsspannung} $\bm{V_{\rm out}}$ \textbf{nähert sich schrittweise exponentiell der Eingangsspannung an!} \\
+Im ersten Zyklus ist $V_{\rm out} = 0 \, \volt$
 
-\begin{tabular}{ll} % // TODO tabular spaces verkleinern
-    Phase PH1   & Kapazität $C_1$ wird auf $V_{in}$ geladen \\
-                & $Q_1 = C_1 \cdot V_{in}$ und $Q_2 = C_2 \cdot V_{out}$ \\
-    Phase PH2   & Ladung \textbf{verschiebt} sich von $C_1$ auf $C_2$, bis beide Kapazitäten \\
-                & dieselbe Spannung aufweisen \\
-                & $\cor{Q_{tot}} = Q_1 + Q_2 = C_1 \cdot V_{in} + C_2 \cdot V_{out} $ \\
-                & \textrightarrow\ Neue Ausgangsspannung: $V_{out} = \frac{\cor{Q_{tot}}}{C_1 + C_2}$
-\end{tabular}
+\begin{tabularx}{\columnwidth}{@{}l X} 
+    Phase PH1   & Kapazität $C_1$ wird auf $V_{\rm in}$ geladen \\
+                & $Q_1 = C_1 \cdot V_{\rm in}$ und $Q_2 = C_2 \cdot V_{\rm out}$ \\
+    Phase PH2   & Ladung \textbf{verschiebt} sich von $C_1$ auf $C_2$, bis beide Kapazitäten dieselbe Spannung aufweisen \\
+                & $\cor{Q_{\rm tot}} = Q_1 + Q_2 = C_1 \cdot V_{\rm in} + C_2 \cdot V_{\rm out} $ \\
+                & \textrightarrow\ Neue Ausgangsspannung: $V_{\rm out} = \frac{\cor{Q_{\rm tot}}}{C_1 + C_2}$
+\end{tabularx}
 
 
 \subsection{Allgemeine Funktionsweise geschaltete Kapazitäten}
@@ -78,26 +76,26 @@ Im ersten Zyklus ist $V_{out} = 0 \, \volt$
 \hfill
 \begin{minipage}[c]{0.46\columnwidth}
     \begin{center}
-        \myul{Ersatzschaltung mit $R_{eq}$}
+        \myul{Ersatzschaltung mit $R_{\rm eq}$}
     \end{center}
     \includegraphics[width=\columnwidth]{images/rc_allgemein.png}
 
     \begin{itemize}
         \item Durchschnittlicher Strom proportional zu $\Delta V$ und $\frac{1}{R}$
-        \item Geschaltetes $C_1$ bildet äquivalenten Widerstand $R_{eq} = \frac{1}{f \cdot C_1} = \frac{T}{C}$
+        \item Geschaltetes $C_1$ bildet äquivalenten Widerstand $R_{\rm eq} = \frac{1}{f \cdot C_1} = \frac{T}{C}$
     \end{itemize}
 \end{minipage}
 
 \vspace{0.2cm}
-Für beide Schaltungen gilt, dass der \textbf{finale Wert der Ausgangsspannung} $V_{out} = V_2$ durch den 
-\textbf{Spannungsteiler} von $R_L$ und $R_{eq}$ bestimmt wird:
+Für beide Schaltungen gilt, dass der \textbf{finale Wert der Ausgangsspannung} $V_{\rm out} = V_2$ durch den 
+\textbf{Spannungsteiler} von $R_L$ und $R_{\rm eq}$ bestimmt wird:
 
 \begin{minipage}[c]{0.48\columnwidth}
-    $$ \boxed{ V_{out} = V_{in} \cdot \frac{R_L}{R_{eq} + R_L} } $$
+    $$ \boxed{ V_{\rm out} = V_{\rm in} \cdot \frac{R_L}{R_{\rm eq} + R_L} } $$
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.48\columnwidth}
-    $$ \boxed{ I = \frac{V_1 - V_2}{R_{eq}} } $$
+    $$ \boxed{ I = \frac{V_1 - V_2}{R_{\rm eq}} } $$
 \end{minipage}
 
 
@@ -107,20 +105,21 @@ Für beide Schaltungen gilt, dass der \textbf{finale Wert der Ausgangsspannung} 
     \includegraphics[width=0.75\columnwidth]{images/spannungsinverter.png}
 \end{center}
 
-\textbf{Ausgangsspannung} $\bm{V_{out}}$ \textbf{nähert sich schrittweise exponentiell $\bm{-V_{SRC}}$ an!} \\
-Im ersten Zyklus ist $V_{out} = 0 \, \volt$
+\textbf{Ausgangsspannung} $\bm{V_{\rm out}}$ \textbf{nähert sich schrittweise exponentiell $\bm{-V_{\rm SRC}}$ an!} \\
+Im ersten Zyklus ist $V_{\rm out} = 0 \, \volt$
 
-\begin{tabular}{ll} % // TODO tabular spaces verkleinern
-    Phase PH1   & Kapazität $C_1$ wird auf $V_{SRC}$ geladen \\
-                & $Q_1 = C_1 \cdot V_{SRC}$ und $Q_2 = C_2 \cdot V_{out}$ \\
+\begin{tabular}{ll@{}} 
+    Phase PH1   & Kapazität $C_1$ wird auf $V_{\rm SRC}$ geladen \\
+                & $Q_1 = C_1 \cdot V_{\rm SRC}$ und $Q_2 = C_2 \cdot V_{\rm out}$ \\
     Phase PH2   & Positiver Anschluss von $C_1$ wird mit GND verbunden \\
-                & \textrightarrow\ Negativer Anschluss von $C_1$ auf Potential $- V_{SRC}$ \\
-                & $\cor{Q_{tot}} = Q_2 - Q_1 = C_2 \cdot V_{out} - C_1 \cdot V_{SRC}$ \\
-                & \textrightarrow\ Neue Ausgangsspannung: $V_{out} = \frac{\cor{Q_{tot}}}{C_1 + C_2}$\\   % // CHECK if this is correct
+                & \textrightarrow\ Negativer Anschluss von $C_1$ auf Potential $- V_{\rm SRC}$ \\
+                & $\cor{Q_{\rm tot}} = Q_2 - Q_1 = C_2 \cdot V_{\rm out} - C_1 \cdot V_{\rm SRC}$ \\
+                & \textrightarrow\ Neue Ausgangsspannung: $V_{\rm out} = \frac{\cor{Q_{\rm tot}}}{C_1 + C_2}$\\   % // CHECK if this is correct
 \end{tabular}
-\vspace{0.2cm}
-Für  $C_1 = C_2$ ändert sich die Ausgangsspannung $V_{out}$ folgendermassen:
-$$ V_{out} = (- \frac{1}{2}, - \frac{3}{4}, - \frac{7}{8} \cdots -1) \cdot V_{SRC} $$
+
+
+Für  $C_1 = C_2$ ändert sich die Ausgangsspannung $V_{\rm out}$ folgendermassen:
+$$ V_{\rm out} = \left\lgroup - \frac{1}{2}, - \frac{3}{4}, - \frac{7}{8} \cdots -1\right\rgroup \cdot V_{\rm SRC} $$
 
 
 \subsection{Spanungsverdoppler mit Switched Capacitors}
@@ -130,25 +129,27 @@ $$ V_{out} = (- \frac{1}{2}, - \frac{3}{4}, - \frac{7}{8} \cdots -1) \cdot V_{SR
 \end{center}
 
 \begin{itemize}
-    \item PH1: $C_1$ wird auf Eingangsspannung $V_{in}$ aufgeladen
-    \item PH2: Negativer Anschluss CAPN wird mit $V_{SRC}$ verbunden \textrightarrow\ Positiver Anschluss $C_1$ springt auf $2 \cdot V_{SRC} $
-    \item Ladung teilt sich zwischen $C_1$ und $C_2$ auf, sodass $V_{out}$ schrittweise ansteigt 
+    \item PH1: $C_1$ wird auf Eingangsspannung $V_{\rm in}$ aufgeladen
+    \item PH2: Negativer Anschluss CAPN wird mit $V_{\rm SRC}$ verbunden\\
+    \textrightarrow\ Positiver Anschluss $C_1$ springt auf $2 \cdot V_{\rm SRC} $
+    \item Ladung teilt sich zwischen $C_1$ und $C_2$ auf, sodass $V_{\rm out}$ schrittweise ansteigt 
 \end{itemize}
 
 
 \subsection{Dickson Charge Pump (Spannungsvervielfacher)}
 
-\begin{minipage}[c]{0.55\columnwidth}
+\begin{minipage}[c]{0.5\columnwidth}
     \includegraphics[width=\columnwidth]{images/dickson_charge_pump.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.43\columnwidth}
+\begin{minipage}[c]{0.48\columnwidth}
     \begin{itemize}
-        \item Mehrstufige Spannungsvervielfacher (hier: einstufig)
+        \item Mehrstufige Spannungsvervielfacher\\
+            (hier: einstufig)
         \item Anzahl Dioden $n$ 
         \item Kaskadierung möglich
     \end{itemize}
-    $$ \boxed{ V_{out} = n \cdot (V_{SRC} - V_D) } $$
+    $$ \boxed{ V_{\rm out} = n \cdot (V_{\rm SRC} - V_D) } $$
 \end{minipage}
 
 
@@ -160,8 +161,10 @@ $$ V_{out} = (- \frac{1}{2}, - \frac{3}{4}, - \frac{7}{8} \cdots -1) \cdot V_{SR
 \hfill
 \begin{minipage}[c]{0.48\columnwidth}
     \begin{itemize}
-        \item Mehrstufige Spannungsvervielfacher (hier: $n = 5$)
+        \item Mehrstufige Spannungsvervielfacher\\
+            (hier: $n = 5$)
     \end{itemize}
 
-    $$ \boxed{ V_{out} = n \cdot (V_{SRC} - V_D) } $$
+    $$ \boxed{ V_{\rm out} = n \cdot (V_{\rm SRC} - V_D) } $$
 \end{minipage}
+
