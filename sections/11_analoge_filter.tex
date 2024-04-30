@@ -148,23 +148,48 @@ Folgende Filter erzielen durch unterschiedliche Polverteilungen untersch. Verhal
 
 \subsection{Filter 2. Ordnung}
 
+% CHECK gilt das für aktive und / oder passive Filter?
 \begin{minipage}[c]{0.48\columnwidth}
     \begin{center}
         \myul{\textbf{Tiefpass}}
     \end{center}
-    $$ \boxed{ G(s) = \frac{V_{\rm out}}{V_{\rm in}} = \frac{A_0}{1 + \frac{1}{\omega_0 \cdot Q} s + \frac{1}{\omega_0^2} s^2 } } $$
+    $$ \boxed{ G(s) = \frac{V_{\rm out}}{V_{\rm in}} = \frac{A_0}{\frac{1}{\omega_0^2} s^2 + \frac{1}{\omega_0 \cdot Q} s + 1 } } $$
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.48\columnwidth}
     \begin{center}
         \myul{\textbf{Bandpass}}
     \end{center}
-    % CHECK gilt das für aktive und / oder passive Filter?
-    $$ \boxed{ G(s) = \frac{V_{\rm out}}{V_{\rm in}} = \frac{A \cdot \frac{\omega_0}{Q} \cdot s}{s^2 +  \frac{\omega_0}{Q} s + \omega_0^2 } } $$
+    $$ \boxed{ G(s) = \frac{V_{\rm out}}{V_{\rm in}} = \frac{A \cdot \frac{\omega_0}{Q} \cdot s}{s^2 +  \frac{1}{ \omega_0 \cdot Q} s + 1 } } $$
 \end{minipage}
+
+\vspace{0.2cm}
+
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{center}
+        \myul{\textbf{Hochpass}}
+    \end{center}
+    $$ \boxed{ G(s) = \frac{V_{\rm out}}{V_{\rm in}} = \frac{A_0 \cdot \frac{1}{\omega_0^2} \cdot s^2}{\frac{1}{\omega_0^2} s^2 + \frac{\omega_0}{Q} s + \omega_0^2 } } $$
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{center}
+        \myul{\textbf{Aufbau Nenner}}
+    \end{center}
+    \begin{outline}
+        \1 Alle Terme positiv
+        \1 $s^2$-Term definiert Grenzfrequenz
+        \1 Im $s$-Term ist Dämpfung enthalten
+            \2 $s$-Term gross \textrightarrow\ grosse Dämpfung
+            \2 $s$-Term $= 0$ \textrightarrow\ Oszillator!
+    \end{outline}
+\end{minipage}
+
+\vspace{0.2cm}
 
 Passive RC-Filter können maximal Güte $0.5$ haben (entkoppelte reelle Pole). Filter höherer Güte benötigen entweder
 Spulen oder \textbf{Verstärker}.
+
 
 
 \example{UTF Tiefpass 2. Ordnung}
@@ -383,7 +408,7 @@ $$ G(s)= \frac{V_{\rm out}}{V_{\rm in}} = Y_{\rm in} \cdot Z_{\rm op} =- \frac{R
 
 \subsection{Regel von Mason (vereinfacht)}
 
-$$ \text{UTF:} \quad G(s) = \frac{V_{\rm out}}{V_{\rm in}} = \frac{\text{Produkt der Transmittanzen im Vorwärtspfad}}{1 - \text{Summe aller Schleifentransmittanzen}} $$
+$$ \boxed{ \text{UTF:} \quad G(s) = \frac{V_{\rm out}}{V_{\rm in}} = \frac{\text{Produkt der Transmittanzen im Vorwärtspfad}}{1 - \text{Summe aller Schleifentransmittanzen}} }$$
 
 
 \example{Analyse Bandpass mittels SFD und Regel von Mason}
@@ -398,3 +423,27 @@ $$ \text{UTF:} \quad G(s) = \frac{V_{\rm out}}{V_{\rm in}} = \frac{\text{Produkt
 
 $$ G(s) = \frac{V_{\rm out}}{V_{\rm in}} = \frac{Y_{\rm in} \cdot Z_{\rm int1} \cdot Y_i \cdot Z_i \cdot Y_{r2} \cdot Z_{\rm int2} }
     {1 - (Y_{\rm fb1} - Y_{\rm fb2}) \cdot Z_{\rm int1} \cdot Y_i \cdot Z_i \cdot Y_{r2} \cdot Z_{\rm int2} } $$
+
+
+
+% -----------------------------------------------------------------------------------------------------------------------------
+% \section{Switched-Capacitor-Verstärker}
+
+\subsection{Switched-Capacitor-Verstärker}
+
+\subsubsection{Invertierender Verstärker}
+
+
+\subsubsection{Nicht-invertierender Verstärker}
+
+
+\subsubsection{(Invertierender) SC-Integrator}
+
+
+\subsubsection{Nicht-invertierender SC-Integrator}
+
+
+\subsection{RC- / SC-Filter}
+
+
+\subsection{Fazit Filter}
