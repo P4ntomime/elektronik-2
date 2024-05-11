@@ -1,18 +1,22 @@
+
+% -------------------------------------------------------------------------------------------------------
+% Section Single- Dual-slope-Wandler
+
 \section{Sigma-Delta-Wandler}
 
-\begin{minipage}{0.45\linewidth}
+\begin{minipage}{0.68\linewidth}
     \begin{tabular}{ll}
         $n$ & Anzahl Bits \\
         $D$ & Digitaler Wert \quad $D < 2^n$ \\
-        $q$ & Quantisierungsschritt \\
+        $q$ & Quantisierungsschritt (1 LSB) \\
         $B_0$ & Bitwert 0 (LSB) \\
         $B_{n-1}$ & Bitwert $n-1$ (MSB)
     \end{tabular}
 \end{minipage}
 \hfill
-\begin{minipage}{0.42\linewidth}
+\begin{minipage}{0.3\linewidth}
     $ \boxed{ q = \frac{V_{\rm refp} - V_{\rm refn}}{2^n} } $ \\
-    $ \boxed{ D = \frac{V_{\rm in} - V_{\rm vrefn}}{V_{\rm refp} - V_{\rm refn}} \, 2^n }  $
+    $ \boxed{ D = \frac{V_{\rm in} - V_{\rm refn}}{V_{\rm refp} - V_{\rm refn}} \, 2^n }  $
 \end{minipage}
 
 
@@ -119,6 +123,25 @@ $\Rightarrow$ Integrationszeit $T = 20 \, \mathrm{ms}$ unterdrückt Netzbrumm vo
     \end{itemize}
 \end{minipage}
 
+% -------------------------------------------------------------------------------------------------------
+% section sigma-delta-wandler
+
+\subsection{Aufbau Sigma-Delta-ADC}
+
+\begin{minipage}[t]{0.6\columnwidth}
+    \begin{center}
+        \myul{Sigma-Delta-ADC}
+    \end{center}
+    \includegraphics[width=\columnwidth]{images/aufbau_sigma_delta_ADC.png}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.38\columnwidth}
+    \begin{center}
+        \myul{Detail: Sigma-Delta-Modulator}
+    \end{center}
+    \includegraphics[width=\columnwidth]{images/aufbau_sigma_delta_modulator.png}
+\end{minipage}
+
 
 \subsection{Sigma-Delta-Modulator 1. Ordnung}
 
@@ -187,10 +210,117 @@ AC-Eingangssignale können durch Mittelwertbildung (z.B. mit Tiefpassfilter mit 
 des Signals $V_{\rm int}$ rekonstruiert werden.
 
 
-\subsection{Aufbau Sigma-Delta-Wandler}
 
 
 \subsection{Modellierung Sigma-Delta-Modulator im Frequenzbereich}
 
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/sigma-delta-modulator_frequenzbereich.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.58\columnwidth}
+
+    \begin{tabular}{ll}
+        $Q(s)$          & Quantisierungsrauschen \\
+        $A_{\rm ADC}$   & Verstärkungsfaktor ADC ($=1$) \\
+        $A_{\rm DAC}$   & Verstärkungsfaktor DAC ($=1$) 
+    \end{tabular}
+\end{minipage}
+
+
+\subsubsection{Übertragungsfunktionen Sigma-Delta Modulator}
+
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{center}
+        \myul{Signal-Übertragungsfunktion $H_s(s)$}
+        (Quantisierungsrauschen $Q(s) = 0$)
+    \end{center}
+    $$ Y(s) = [X(s) - Y(s)] \cdot\frac{1}{s \cdot T} $$
+    $$ \boxed{ H_s(s) = \frac{Y(s)}{X(s)} = \frac{1}{1 + s \cdot T} \quad \text{(Tiefpass)}} $$
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{center}
+        \myul{Noise-Übertragungsfunktion $H_n(s)$}
+        (Eingangssignal $X(s) = 0$)
+    \end{center}
+    $$ Y(s) = - Y(s) \cdot\frac{1}{s \cdot T} + Q(s) $$
+    $$ \boxed{ H_n(s) = \frac{Y(s)}{Q(s)} = \frac{s \cdot T}{1 + s \cdot T} \quad \text{(Hochpass)}} $$
+\end{minipage}
+
+% gutes Bild für Noise-Übertragungsfunktion bzw. Noise-Shaping aber ka wohin damit
+% \includegraphics[width=\columnwidth]{images/noise_shaping_sigma_delta.png} 
+
+\subsection{Fazit Sigma-Delta-Modulatoren 1. Ordnung}
+
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{itemize}
+        \item[+] Signal wird nicht (wenig) verändert mit Tiefpass
+        \item[+] 1 Bit DAC perfekt linear 
+        \item[+] 1. SNR-Erhöhung durch Oversampling ($3 \, \deci \bel$ pro Oktave)
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{itemize}
+        \item[+] 2. SNR-Erhöhung durch Noise Shaping ($6 \, \deci \bel$ pro Oktave)
+        \item[+] Immer stabil ($90 \degree$ Phasenschiebung)
+        \item[-] 1 Bit ADC (Komparator) nichtlinear
+        \item[-] \textbf{Pattern Noise} 
+    \end{itemize}
+\end{minipage}
+
 
 \subsection{Oversampling / Signal-Rausch-Abstand (SNR)}
+
+$$ \boxed{ \text{Rauschleistung} = \text{Rauschleistungsdichte} * \text{Bandbreite} = \frac{q^2}{12} = \text{konstant}} $$
+
+\begin{itemize}
+    \item Oversampling verteilt Quantisierungsrauschen über grösseren Frequenzbereich
+    \item Da die Rauschleistung konstant ist, wird die Rauschleistungsdichte (also die 'Amplitude' des Rauschens) kleiner
+    \item Ein Digitalfilter reduziert die Bandbreite des ADCs weiter
+\end{itemize}
+
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/rauschen_ohne_oversampling.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/rauschen_mit_oversampling.png}
+\end{minipage}
+
+
+\subsubsection{Noise-Shaping}
+
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/rauschen_mit_oversampling_und_noise_shaping.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    \begin{itemize}
+        \item Nicht nur Oversampling und Rauschen gleichmässig verteilen, sondern Rauschleistungsdichte 'formen'
+        \item \textbf{Nur bei Sigma-Delta-Wandlern möglich}
+    \end{itemize}
+\end{minipage}
+
+
+\subsection{Sigma-Delta-Wandler 2. Ordnung}
+
+\begin{minipage}[c]{0.48\columnwidth}
+    \includegraphics[width=\columnwidth]{images/sigma-delta-wandler_ordnung_2.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    $$ \boxed{ \text{SNR} \approx \log_{10} \Bigl( \frac{3}{2} \cdot \frac{2 \cdot M + 1}{\pi^{2M}} \cdot \text{OSR}^{2M+1} \Bigr) } $$
+    \begin{tabular}{ll}
+        OSR & Oversampling-Rate \\
+        $M$ & Ordnung des Modulators
+    \end{tabular}
+\end{minipage}
+
+\begin{itemize}
+    \item Ordnung $M = 2$ \textrightarrow\ 2 Integratoren
+    \item Quantisierungsrauschen $Q(s)$ wird mit Hochpass 2. Ordnung gefiltert
+    \item Je höher Ordnung $M$, desto stärker das Noise-Shaping ($6 \, \deci \bel$ pro Ordnung und Oktave)
+    \item Je höher Oversampling (OSR), desto höher SNR ($3 \, \deci \bel$ Oktave)
+\end{itemize}
