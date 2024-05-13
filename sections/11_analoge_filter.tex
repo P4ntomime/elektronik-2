@@ -289,7 +289,7 @@ $$ \boxed{ G(s) = \frac{G_0}{1 + C_2 \Big( R_2 + R_2 + R_3 \frac{R_2}{R_1} \Big)
     \begin{outline}
         \1 Invertierend
         \1 $f_g$ sensitiver auf Toleranzen 
-        \1[] % TODO: Braucht es hier noch ein Equivalent?
+        \1[] 
         \1 Noise-Gain: $A+1$
         \1 Eher für 
             \2 Tiefpass, Bandpass
@@ -331,8 +331,8 @@ $$ f_0 = \frac{1}{2 \pi \sqrt{C_{i1} C_{i2} R_{\rm fb} R_{i2} \frac{R_1}{R_2}}} 
 
 
 \subsubsection{Allgemein: Filter mit mehreren OpAmps}
-% TODO: was hat '~' hier verloren?
-Mit der Filter-Struktur aus Abschnitt ~\ref{zustandsvariablenfilter} können auch Bandpass- und Hochpass-Filter gebildet werden:
+
+Mit der Filter-Struktur aus Abschnitt~\ref{zustandsvariablenfilter} können auch Bandpass- und Hochpass-Filter gebildet werden:
 \begin{itemize}
     \item \textbf{Tiefpass:} Abgriff beim 3. OpAmp ($V_{\rm out}$ gemäss Abschnitt ~\ref{zustandsvariablenfilter})
     \item \textbf{Bandpass:} Abgriff beim 2. OpAmp (an Knoten V2)
@@ -553,14 +553,13 @@ $$ G(s) = \frac{V_{\rm out}}{V_{\rm in}} = \frac{Y_{\rm in} \cdot Z_{\rm int1} \
     \end{center}
 
     $$ \omega_0 =  \frac{1}{T} \sqrt{ \frac{C_{\rm rfb} C_{r2}}{ C_{i1} C_{i2}} } $$
-
-    \begin{itemize}
-        \item $C_{r2}$ wird umgekehrt angesteuert \\
-            \textrightarrow\ bilder 'negativen Widerstand
-        \item Kapazitäts-Verhältnisse und Taktperiode $T$ bestimmen $f_0$ bzw. $\omega_0$
-    \end{itemize}
 \end{minipage}
 
+\begin{outline}
+    \1 Für \textbf{SC-Filter} gilt:
+        \2 $C_{r2}$ wird umgekehrt angesteuert \textrightarrow\ bildet 'negativen Widerstand
+        \2 Kapazitäts-Verhältnisse und Taktperiode $T$ bestimmen $f_0$ bzw. $\omega_0$
+\end{outline}
 
 \subsection{Fazit Filter}
 
