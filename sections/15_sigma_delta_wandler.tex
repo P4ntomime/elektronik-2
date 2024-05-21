@@ -2,7 +2,7 @@
 % -------------------------------------------------------------------------------------------------------
 % Section Single- und Dual-Slope-Wandler
 
-\section{Sigma-Delta-Wandler}
+\section{Sigma-Delta-ADC}
 
 \begin{minipage}{0.68\linewidth}
     \begin{tabular}{ll}
@@ -124,9 +124,10 @@ $\Rightarrow$ Integrationszeit $T = 20 \, \mathrm{ms}$ unterdrückt Netzbrumm vo
 \end{minipage}
 
 % -------------------------------------------------------------------------------------------------------
-% section sigma-delta-wandler
+% \section{Sigma-Delta-ADC}
 
 \subsection{Aufbau Sigma-Delta-ADC}
+\label{Aufbau Sigma-Delta-ADC}
 
 \begin{minipage}[t]{0.6\columnwidth}
     \begin{center}
@@ -144,6 +145,7 @@ $\Rightarrow$ Integrationszeit $T = 20 \, \mathrm{ms}$ unterdrückt Netzbrumm vo
 
 
 \subsection{Sigma-Delta-Modulator 1. Ordnung}
+\label{Sigma-Delta-modulator Ordnung 1}
 
 \begin{minipage}[c]{0.48\columnwidth}
     \includegraphics[width=\columnwidth]{images/sigma-delta-wandler.png}
@@ -159,9 +161,7 @@ $\Rightarrow$ Integrationszeit $T = 20 \, \mathrm{ms}$ unterdrückt Netzbrumm vo
     \end{tabular}
 \end{minipage}
 $$\boxed{\text{Allgemein: } V_{\rm int}(t) = \Delta V_{\rm int} + V_{\rm int,0} 
-    = - \frac{1}{C_i} \int\limits_0^{t} \Bigg( \frac{V_{\rm in - A_{ \rm GND}}}{R_{i1}} + \frac{V_{\rm ref - A_{ \rm GND}}}{R_{i2}} \Bigg) \diff \tilde{t} + V_{\rm int,0} }$$
-    % CHECK: Was ist mit AGND? Wird das noch irgendwo draufgerechnet?
-    % CHECK: Vint,0 ev VAGND?
+    = - \frac{1}{C_i} \int\limits_0^{t} \Bigg( \frac{V_{\rm in} - A_{ \rm GND}}{R_{i1}} + \frac{V_{\rm ref} - A_{ \rm GND}}{R_{i2}} \Bigg) \diff \tilde{t} + V_{\rm int,0} }$$
 
 \begin{itemize}
     \item Sigma-Delta-Wandler machen \textbf{gleichzeitig} Auf- und Abintegration (Feedback-Pfad)
@@ -199,8 +199,9 @@ $$\boxed{\text{Allgemein: } V_{\rm int}(t) = \Delta V_{\rm int} + V_{\rm int,0}
 
 \begin{itemize}
     \item DC-Eingangssignale erzeugen \textbf{repetitive Sequenzen} mit hohen Frequenz-Anteilen
-    \item Ist $V_{\rm in}$ nahe bei Bruchteil vin $V_{ref}$ entstehen \textbf{lange repetitive Sequenzen} mit tiefen Frequenz-Anteilen
-    \item \textbf{Lange repetitive Sequenzen können nicht von Signal unterschieden werden \textrightarrow\ Pattern Noise}
+    \item Ist $V_{\rm in}$ nahe bei Bruchteil vin $V_{\rm ref}$ entstehen \textbf{lange repetitive Sequenzen} mit tiefen Frequenz-Anteilen
+    \item \textbf{Lange repetitive Sequenzen können nicht von Signal unterschieden werden\\
+        \textrightarrow\ Pattern Noise}
 \end{itemize}
         
 
@@ -250,25 +251,6 @@ des Signals $V_{\rm int}$ rekonstruiert werden.
 
 % gutes Bild für Noise-Übertragungsfunktion bzw. Noise-Shaping aber ka wohin damit
 % \includegraphics[width=\columnwidth]{images/noise_shaping_sigma_delta.png} 
-
-\subsection{Fazit Sigma-Delta-Modulatoren 1. Ordnung}
-
-\begin{minipage}[t]{0.48\columnwidth}
-    \begin{itemize}
-        \item[+] Signal wird nicht (wenig) verändert mit Tiefpass
-        \item[+] 1 Bit DAC perfekt linear 
-        \item[+] 1. SNR-Erhöhung durch Oversampling ($3 \, \deci \bel$ pro Oktave)
-    \end{itemize}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.48\columnwidth}
-    \begin{itemize}
-        \item[+] 2. SNR-Erhöhung durch Noise Shaping ($6 \, \deci \bel$ pro Oktave)
-        \item[+] Immer stabil ($90 \degree$ Phasenschiebung)
-        \item[-] 1 Bit ADC (Komparator) nichtlinear
-        \item[-] \textbf{Pattern Noise} 
-    \end{itemize}
-\end{minipage}
 
 
 \subsection{Oversampling / Signal-Rausch-Abstand (SNR)}
@@ -327,5 +309,210 @@ $$ \boxed{ \text{Rauschleistung} = \text{Rauschleistungsdichte} * \text{Bandbrei
 
 
 % ------------------------------------------------------------------------------------------------------------------------------------
-
+% \section{Multi-Bit Modulatoren}
 \subsection{Multi-Bit Modulatoren}
+
+Anstatt eines Komparators ADCs mit mehreren Bits für den Aufbau des Sigma-Delta-\textbf{Modulators} verwendet.
+
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{itemize}
+        \item[+] \textbf{Dynamikgewinn von ca. $\bm{6 \, \deci \bel }$ pro zusätzlichem Bit.}
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{itemize}
+        \item[-] Aufwändiger Flash-ADC (parallele Komparatoren) nötig, da in einem Takt gewandelt werden muss
+    \end{itemize}
+\end{minipage}
+
+
+% weglassen? von Slides abgeschrieben...
+\subsection{1 Bit vs. Multi-Bit ADC (im Modulator)}
+
+\begin{itemize}
+    \item ADC ist unproblematisch, da hinter Integrator (siehe Blockschaltbild Abschnitt~\ref{Aufbau Sigma-Delta-ADC}) und dahei 
+        Teil vom Quantisierungsfehler
+    \item 1-Bit ADC (Komparator) nichtlinear \textrightarrow\ ADC-Verstärkung signalabhängig
+    \item Es entsteht ein nichtlineares System
+\end{itemize}
+
+
+% weglassen? von Slides abgeschrieben...
+\subsection{1 Bit vs. Multi-Bit DAC (im Modulator)}
+
+\begin{outline}
+    \1 DAC muss volle Präzision des (gesamten) Wandlers haben
+        \2 DAC-Spannung wird direkt mit Eingangsspannung 'verrechnet'
+    \1 1-Bit DAC ist perfekt linear (nur Offset- und Gain-Fehler, welche statisch kompensierbar sind)
+    \1 DAC muss sehr genau sein \textrightarrow\ kann kalibriert werden
+        \2 Drifttemperatur und Alterung sind dennoch ein Problem
+\end{outline}
+
+
+\subsection{Dynamic Element Matching (DEM), Mismatch-Shaping}
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/strom-DAC.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.58\columnwidth}
+    \begin{outline}
+        \1 Widerstände des DAC müssen perfekt matchen (so gut wie DAC-Genauigkeit)
+            \2 In der Praxis ist das nicht möglich!\\
+                \textrightarrow\ mismatch
+    \end{outline}
+\end{minipage}
+
+\vspace{0.2cm}
+
+\begin{outline}
+    \1 Dynamic Element Matching (DEM): Spezieller Algorithmus
+        \2 Einschalten der einzelnen Widerstände wird dynamisch umgestaltet, so dass Ausgangskennline des DAC 
+            'durchschnittlich linear' \\
+            \textrightarrow\ Systematischer Fehler wird in Zufallsfehler (Rauschen) umgewandelt
+    \1 Mismatch-Shaping 
+        \2 Zufallsfehler (Rauschen) wird mit Noise-Shaping gedämpft
+\end{outline}
+
+
+\subsection{Fazit Sigma-Delta-Modulatoren}
+
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{itemize}
+        \item[+] Signal wird nicht (wenig) verändert mit Tiefpass
+        \item[+] 1 Bit DAC perfekt linear 
+        \item[+] 1. SNR-Erhöhung durch Oversampling ($3 \, \deci \bel$ pro Oktave)
+        \item[+] 2. SNR-Erhöhung durch Noise Shaping ($6 \, \deci \bel$ pro Oktave)
+        \item[+] 3. SNR-Erhöhung durch ADC/DAC im Modulator ($+6 \, \deci \bel$ pro Bit)
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+    \begin{itemize}
+
+        \item[+] Modulatoren 1. Ordnung immer stabil ($90 \degree$ Phasenschiebung)
+        \item[+] Modulatoren 2. Ordnung meistens stabil
+        \item[-] Modulatoren höherer Ordnung können instabil werden  
+        \item[-] 1 Bit ADC (Komparator) nichtlinear
+        \item[-] \textbf{Pattern Noise} 
+    \end{itemize}
+\end{minipage}
+
+
+\subsection{Digitalfilter}
+
+Der digitale Teil des Sigma-Delta-ADCs kann auf mehrere Arten realisiert werden.  Das Digitalfilter soll die folgenden Aufgaben
+erfüllen:
+
+\begin{minipage}[t]{0.55\columnwidth}
+    \begin{itemize}
+        \item Reduktion des Rauschens (wegen Noise-Shaping viel Rauschen bei hohen Frequenzen)
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.42\columnwidth}
+    \begin{itemize}
+        \item Erhöhung der Auflösung
+        \item Redution der Sample Rate
+    \end{itemize}
+\end{minipage}
+
+
+\subsubsection{Mittelwertbildung}
+
+Einfachste Mittelwertbildung umgesetzt mittels countern \textrightarrow\ Funktionsweise und Formel 
+siehe Abschnitt~\ref{Sigma-Delta-modulator Ordnung 1}
+
+
+\subsubsection{Kammfilter (Mittelwertfilter)}
+
+\begin{minipage}[t]{0.45\columnwidth}
+    \begin{tabular}{ll}
+        $Z^{-1}$    & um $1$ Takt verschieben \\
+        $Z^{-L}$    & um $L$ Takte verschieben \\
+    \end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.52\columnwidth}
+    \begin{tabular}{ll}
+        FIR    & Finite Impulse Response \\
+        IIR    & Infinite Impulse Response \\
+    \end{tabular}
+\end{minipage}
+
+\vspace{0.2cm}
+
+\begin{minipage}[t]{0.58\columnwidth}
+    \begin{center}
+        \myul{FIR-Filter}
+    \end{center}
+    \includegraphics[width=\columnwidth]{images/kammfilter.png}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.38\columnwidth}
+    \begin{center}
+        \myul{IIR-Filter}
+    \end{center}
+    \includegraphics[width=\columnwidth]{images/kammfilter_IIR-filter.png}
+\end{minipage}
+
+\subsubsection*{Frequenzgang kaskadierte Kammfilter}
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/frequenzgang_kaskadierte_kammfilter.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.58\columnwidth}
+    \begin{itemize}
+        \item Bezeichnung kaskadierte Kammfilter: \\
+            CIC (Cascaded-Integrator-Comb-Filter)
+        \item Notches ('Auslöschungen') bei $n \cdot \frac{\text{Sampling-Freq.}}{L}$
+        \item Je höher die Ordnung, desto steiler der Abfall im Amplitudengang
+    \end{itemize}
+\end{minipage}
+
+
+\section{Sigma-Delta-DAC}
+
+Die finale Realisierung des DACs erfolgt als \textbf{PWM-DAC}. Die Generierung des PWM-Sigmals erfolgt nach dem Sigma-
+Delta-Prinzip
+
+\begin{minipage}[t]{0.58\columnwidth}
+    \includegraphics[width=\columnwidth]{images/sigma-delta_DAC.png}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.38\columnwidth}
+    \includegraphics[width=\columnwidth]{images/sigma-delta_DAC_verlauf.png}
+\end{minipage}
+
+\subsection{Pattern-Noise}
+
+Für einen 8-Bit DAC ist der digitale Wert $129$ ungünstig, da in der Bitsequenz irgendwann zwei '1' hintereinander auftauchen.
+Dies führt zu einer grossen Periodendauer, welche ein \textbf{Pattern Noise} beim DAC verursacht, da die '0' und '1' möglichst
+gleichmässig auf die gesamte Periode verteilt werden.
+
+
+
+
+\subsection{Bilanz Sigma-Delta-DAC}
+
+\begin{minipage}[c]{0.48\columnwidth}
+    \begin{itemize}
+        \item Verhalten wie analoger Modulator (Blockschaltbild)
+    \end{itemize}
+
+    \includegraphics[width=\columnwidth]{images/sigma-delta-DAC_blockschaltbild.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\columnwidth}
+    \begin{itemize}
+        \item Im Mittel gleich viele '1' und '0' wie bei PWM $= \frac{n}{N}$
+        \item '1' werden möglichst gleichmässig in Periode verteilt ($N \cdot T_{\rm clk}$)
+        \item Gleichmässige Verteilung ergibt regelmässige Sequenzen \textrightarrow\ periodische Signale \textrightarrow\ unerwünschte
+            Frequenzkomponenten (Pattern Noise)
+    \end{itemize}
+\end{minipage}
+
+
+
