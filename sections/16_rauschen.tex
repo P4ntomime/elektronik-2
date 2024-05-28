@@ -3,12 +3,14 @@
 \subsection{Übersicht der Grössen und Zusammenhänge}
 
 \begin{minipage}[c]{0.7\columnwidth}
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{lll}
         $e_n$               & Rauschspannungsdichte & $[e_n] = \frac{\volt}{\sqrt{\hertz}}$ \\
         $v_n$               & Rauschspannung        & $[v_n] = \volt$ \\
         $e_n^2$ (oder $S$)  & Rauschleistungsdichte & $[e_n^2] = \frac{\volt^2}{\hertz}$ \\
         $E$                 & Rauschleistung        & $[E] = \volt^2$ \\
     \end{tabular}
+    \renewcommand{\arraystretch}{1}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.28\columnwidth}
@@ -297,13 +299,65 @@ Für $n$ kaskadierte Butterworth-Filter 1. Ordnung mir Grenzfrequenz $f_c = \fra
 \begin{minipage}[c]{0.58\columnwidth}
     \begin{outline}
         \1 6 Rauschquellen 
-            \2 $e_1$, $e_2$, $e_3$ sind Rauschspannungen der Widerstände    % CHECK Rauschspannungen oder Spannungsdichten
+            \2 $e_1$, $e_2$, $e_3$ sind \textbf{Rauschspannungen} der Widerstände
             \2 $e_n$ ist Rauschsppannungsdichte des OpAmps
             \2 $i_{nn}$, $i_{np}$ sind Eingangsströme des OpAmps
         \1 Ausgangsspannung $V_{\rm out}$ wird berechnet mittels \textbf{Superposition}
     \end{outline}
 \end{minipage}
 
+
+Jede Quelle trägt folgendermassen zum gesamten Rauschen bei (exkl. Stromquellen):
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/rauschen_opamp_R1.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.4\columnwidth}
+    Beitrag von $R_1$ wird \textbf{invertierend} verstärkt \\
+
+    Rauschspannung: $ - \frac{R_2}{R_1} \cdot e_1$ \\
+    Rauschleistung: $ \bigl(- \frac{R_2}{R_1} \bigr) \cdot e_1^2$
+\end{minipage}
+
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/rauschen_opamp_R2.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.4\columnwidth}
+    Beitrag von $R_2$ wird \textbf{nicht} verstärkt \\
+
+    Rauschspannung: $ 1 \cdot e_2$ \\
+    Rauschleistung: $ 1 \cdot e_2^2$
+\end{minipage}
+
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/rauschen_opamp_R3.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.4\columnwidth}
+    Beitrag von $R_3$ wird \textbf{nicht-invertierend} verstärkt \\
+
+    Rauschspannung: $ \frac{R_1 + R_2}{R_1} \cdot e_3$ \\
+    Rauschleistung: $ \bigl(\frac{R_1 + R_2}{R_1} \bigr) \cdot e_3^2$
+\end{minipage}
+
+
+\begin{minipage}[c]{0.4\columnwidth}
+    \includegraphics[width=\columnwidth]{images/rauschen_opamp_en.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.4\columnwidth}
+    Beitrag von $e_n$ (OpAmp) wird \textbf{nicht-invertierend} verstärkt \\
+
+    Rauschspannung: $ \frac{R_1 + R_2}{R_1} \cdot e_n$ \\
+    Rauschleistung: $ \bigl(\frac{R_1 + R_2}{R_1} \bigr) \cdot e_n^2$
+\end{minipage}
+
+\vspace{0.2cm}
+Für die obige Beschaltung ergibt sich somit gesamthaft:
 $$ \boxed{ \scriptstyle{  V_{\rm noise} = \sqrt{ \int\limits_{0}^{\infty} \,  \Biggl[
     4 k T R_2 \Bigl( \frac{R_1 + R_2}{R_1} \Bigr)^2 + 4 k T R_3 \Bigl( \frac{R_1 + R_2}{R_1} \Bigr)^2
     + (i_{nn} R_2 )^2 + \Bigl(  i_{np} R_3 \Bigl( \frac{R_1 + R_2}{R_1} \Bigr) \Bigr)^2
