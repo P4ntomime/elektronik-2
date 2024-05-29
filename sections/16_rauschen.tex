@@ -5,15 +5,15 @@
 \begin{minipage}[c]{0.7\columnwidth}
     \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{lll}
-        $e_n$               & Rauschspannungsdichte & $[e_n] = \frac{\volt}{\sqrt{\hertz}}$ \\
-        $v_n$               & Rauschspannung        & $[v_n] = \volt$ \\
-        $e_n^2$ (oder $S$)  & Rauschleistungsdichte & $[e_n^2] = \frac{\volt^2}{\hertz}$ \\
-        $E$                 & Rauschleistung        & $[E] = \volt^2$ \\
+        $e_n$               & Rauschspannungsdichte                     & $[e_n] = \frac{\volt}{\sqrt{\hertz}}$ \\
+        $v_n$               & Rauschspannung (\textbf{Effektivwert})    & $[v_n] = \volt$ \\
+        $e_n^2$ (oder $S$)  & Rauschleistungsdichte                     & $[e_n^2] = \frac{\volt^2}{\hertz}$ \\
+        $E$                 & Rauschleistung                            & $[E] = \volt^2$ \\
     \end{tabular}
     \renewcommand{\arraystretch}{1}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.28\columnwidth}
+\begin{minipage}[c]{0.23\columnwidth}
     $$ \boxed{ E = \int\limits_{0}^{\infty} e_n^2 \, \diff f } $$
     $$ \boxed{ E =  v_n^2 } $$
 \end{minipage}
@@ -141,7 +141,7 @@
     \end{tabular}
 \end{minipage}
 
-$$ \boxed{ \text{Mittlere Rauschleistungsdichte:} \quad  4 k T R  = 4 k T G} $$ 
+$$ \boxed{ \text{Mittlere Rauschleistungsdichte (in)} \frac{\volt^2}{\hertz}:  4 k T R } $$ 
 
 
 \subsubsection{Serieschaltung von Widerständen}
@@ -302,7 +302,7 @@ Für $n$ kaskadierte Butterworth-Filter 1. Ordnung mir Grenzfrequenz $f_c = \fra
             \2 $e_1$, $e_2$, $e_3$ sind \textbf{Rauschspannungen} der Widerstände
             \2 $e_n$ ist Rauschsppannungsdichte des OpAmps
             \2 $i_{nn}$, $i_{np}$ sind Eingangsströme des OpAmps
-        \1 Ausgangsspannung $V_{\rm out}$ wird berechnet mittels \textbf{Superposition}
+        \1 Ausgangsspannung $V_{\rm noise}$ wird berechnet mittels \textbf{Superposition}
     \end{outline}
 \end{minipage}
 
@@ -357,7 +357,7 @@ Jede Quelle trägt folgendermassen zum gesamten Rauschen bei (exkl. Stromquellen
 \end{minipage}
 
 \vspace{0.2cm}
-Für die obige Beschaltung ergibt sich somit gesamthaft:
+Für die \textbf{obige Beschaltung} (nicht allgemeingültig) ergibt sich somit gesamthaft:
 $$ \boxed{ \scriptstyle{  V_{\rm noise} = \sqrt{ \int\limits_{0}^{\infty} \,  \Biggl[
     4 k T R_2 \Bigl( \frac{R_1 + R_2}{R_1} \Bigr)^2 + 4 k T R_3 \Bigl( \frac{R_1 + R_2}{R_1} \Bigr)^2
     + (i_{nn} R_2 )^2 + \Bigl(  i_{np} R_3 \Bigl( \frac{R_1 + R_2}{R_1} \Bigr) \Bigr)^2
