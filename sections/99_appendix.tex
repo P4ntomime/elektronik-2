@@ -1,17 +1,21 @@
 \section{Anhang}
 
-\subsection{Temperaturabhängigkeit von Widerständen}
 
-\begin{minipage}[c]{0.3\columnwidth}
-    $$ \boxed{R_{\vartheta} = R_{20} + \Delta R} $$
-    $$ \boxed{\Delta R = R_{20} \cdot \alpha \cdot \Delta \vartheta} $$
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.68\columnwidth}
-    \begin{tabular}{c l c}
-        $R_{\vartheta}$     & Widerstand bei Temperatur $\vartheta$             & $[R_{\vartheta}] = \ohm$ \\
-        $R_{20}$            & Widerstand bei $20 \, \celsius$                   & $[R_{20}] = \ohm$ \\
-        $\alpha$            & Temperaturkoeffizient                             & $[\alpha] = \frac{1}{\kelvin}$\\
-        $\Delta \vartheta$  & Temperaturdifferenz $\vartheta - 20 \, \celsius$  & $[\Delta \vartheta] = \celsius$\\
-    \end{tabular}
-\end{minipage}
+\subsection{E-Reihen}
+
+\scalebox{0.58}{
+
+\begin{tabular}{| c|c|c|c | c|c|c|c | c|c|c|c | c|c|c|c | c|c|c|c | c|c|c|c |}
+    \toprule
+    \cbl{10}    &       & 12    &       & \cbl{15}  &       & 18    &       & \cbl{22}  &       & 27    &       & \cbl{33}  &    & 39   &       & \cbl{47}  &       & 56    &       & \cbl{68}  &       & 82    &       \\
+    \midrule
+                & 11    &       & 13    &           & 16    &       & 20    &           & 24    &       & 30    &           & 36 &      & 43    &           & 51    &       & 62    &           & 75    &       & 91    \\
+    \bottomrule
+\end{tabular}
+}
+
+\begin{tabular}{ll c ll}
+    E6-Reihe:   & \cbl{blau markierte}  & & E12-Reihe: & obere Zeile \\
+    E24-Reihe:  & ganze Tabelle
+\end{tabular}
+
