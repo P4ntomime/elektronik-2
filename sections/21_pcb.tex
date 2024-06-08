@@ -139,7 +139,7 @@ Die verschiedenen Lagen des PCBs werden mit Vias miteinander verbunden.
 
 \subsection{Elektrische Eigenschaften von PCBs}
 
-\subsubsection{Widerstand von Leitungen}
+\subsubsection{Widerstand von Leiterbahnen}
 
 \begin{minipage}[t]{0.35\columnwidth}
     \includegraphics[width=\columnwidth]{images/leitung_widerstand.jpg}
@@ -148,16 +148,16 @@ Die verschiedenen Lagen des PCBs werden mit Vias miteinander verbunden.
 \hfill
 \begin{minipage}[t]{0.62\columnwidth}
     \begin{tabular}{llc}
-        $R$     & Widerstand ($@ \, 20 \, \degree$)         & $[R] = \ohm$ \\
-        $\rho$  & spez. Widerstand                          & $[\rho] = \frac{\ohm \milli \meter^2}{\meter}$ \\
-        $l$     & Länge des Leiters                         & $[l] = \meter$ \\
-        $w$     & Breite des Leiters                        & $[w] = \meter$ \\
-        $d$     & Dicke des Leiters ($35 \, \micro \meter$) & $[d] = \meter$ 
+        $R$     & Widerstand ($@ \, 20 \, \degree$)             & $[R] = \ohm$ \\
+        $\rho$  & spez. Widerstand                              & $[\rho] = \frac{\ohm \milli \meter^2}{\meter}$ \\
+        $l$     & Länge des Leiters                             & $[l] = \meter$ \\
+        $w$     & Breite der Leiterbahn                         & $[w] = \meter$ \\
+        $d$     & Dicke der Leiterbahn ($35 \, \micro \meter$)  & $[d] = \meter$ 
     \end{tabular}
 \end{minipage}
 
 
-\subsubsection{Kapazität von Leitungen}
+\subsubsection{Kapazität von Leiterbahnen}
 
 \begin{minipage}[c]{0.28\columnwidth}
     \includegraphics[width=\columnwidth]{images/leitungen_kapazitaet.jpg}
@@ -171,12 +171,37 @@ Die verschiedenen Lagen des PCBs werden mit Vias miteinander verbunden.
     $C$             & Kapazität (\textbf{Plattenkondensator!})          & $[C] = \farad$ \\
     $\varepsilon_0$ & elektrische Feldkonstante $8.85 \cdot 10^{-12}$   & $[\varepsilon_0] = \frac{\farad}{\meter}$ \\
     $\varepsilon_r$ & relative Permittivität (FR4: $\varepsilon_r= 4.5$)& $[\varepsilon_r] = 1$ \\
-    $A = W \cdot L$ & Fläche der Platten                                & $[A] = \meter$ \\
+    $A = W \cdot L$ & Fläche der Platten                                & $[A] = \meter^2$ \\
     $d$             & Abstand zwischen Platten                          & $[d] = \meter$
 \end{tabular}
 
 
-\subsubsection{Induktivität von Leitungen}
+\subsubsection{Kapazität zwischen Leiterbahn und Fläche}
+
+\begin{minipage}[c]{0.28\columnwidth}
+    \includegraphics[width=\columnwidth]{images/kapazitaet_leiterbahn_plane.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.45\columnwidth}
+    $$ \boxed{C_{\rm sw} = 2 \cdot \varepsilon_0 \cdot \varepsilon_r \cdot l \cdot \ln \Big( 1 + \frac{t}{d} \Big) } $$
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.23\columnwidth}
+    $$ \boxed{C_{\rm tot} = C_P + C_{\rm sw}} $$
+\end{minipage}
+
+\begin{tabular}{llc}
+    $C_{\rm sw}$    & Sidewall-Kapazität                                & $[C_{\rm sw}] = \farad$ \\
+    $\varepsilon_0$ & elektrische Feldkonstante $8.85 \cdot 10^{-12}$   & $[\varepsilon_0] = \frac{\farad}{\meter}$ \\
+    $\varepsilon_r$ & relative Permittivität (FR4: $\varepsilon_r= 4.5$)& $[\varepsilon_r] = 1$ \\
+    $l$             & Länge der Leiterbahn                              & $[l] = \meter$ \\
+    $t$             & Dicke der Leiterbahn                              & $[t] = \meter$ \\
+    $d$             & Abstand zwischen Leiterbahn und Fläche            & $[d] = \meter$
+\end{tabular}
+
+
+
+\subsubsection{Induktivität von Leiterbahnen}
 
 \begin{minipage}[c]{0.48\columnwidth}
     \includegraphics[width=\columnwidth]{images/leitung_induktivitaet.jpg}
@@ -186,6 +211,19 @@ Die verschiedenen Lagen des PCBs werden mit Vias miteinander verbunden.
     $$ \boxed{ \text{Für } l \gg w \gg r \qquad L = \frac{\mu \cdot l}{\pi} \cdot \ln \Bigg( \frac{w}{r} \Bigg) } $$
 \end{minipage}
 
+
+\begin{minipage}[c]{0.46\columnwidth}
+    $$ \boxed{ \scriptstyle{ L_C = l \cdot \Bigg( \ln \Big( \frac{2 \cdot l}{w + d} \Big) + 0.2235 \cdot \frac{w + d}{l} + 0.5 \Bigg) \cdot 200 \frac{\milli \henry}{\meter} }} $$
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.52\columnwidth}
+    \begin{tabular}{@{}llc@{}}
+        $L_C$           & Induktivität (flache) PCB-Verbindung  \\
+        $l$             & Länge der Leiterbahn                  \\
+        $w$             & Breite der Leiterbahn                 \\
+        $d$             & Dicke der Leiterbahn      
+    \end{tabular}
+\end{minipage}
 
 \subsection{Signalfluss auf dem PCB}
 
