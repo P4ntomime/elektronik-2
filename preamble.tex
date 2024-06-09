@@ -417,15 +417,15 @@
 
 
 % custom text rightarrow to match tikz arrows
-\renewcommand{\textrightarrow}{
-    \tikz{
+\renewrobustcmd{\textrightarrow}{%
+    \tikz{%
         \draw[-{Stealth[length=1.7mm]},
               double]
                 (0,0) to (0.3,0);}}
 
 % custom text leftrightarrow to match tikz arrows
-\newcommand{\textlrarrow}{
-    \tikz{
+\newrobustcmd{\textlrarrow}{%
+    \tikz{%
         \draw[{Stealth[length=1.7mm]}-{Stealth[length=1.7mm]},
               double]
                 (0,0) to (0.4,0);}}
@@ -523,20 +523,35 @@
                                 \normalfont\normalsize\myul{\url{\repo}}
                                 \raggedcolumns}
                             % PORTRAIT LAYOUT
-                            {\hfill\null\vspace{1cm}
-                            \begin{center}
-                                \normalfont\fontsize{35}{32}\selectfont\bfseries\title{}\\[7.5mm]
-                                \normalfont\huge\semester\ \dozent{}\\
-                                \normalfont\Large Autoren:\\
-                                \normalfont\Large\author{}\\[2mm]
-                                \normalfont\large Version:\\
-                                \normalfont\large\version{}\\
-                                \normalfont\normalsize\myul{\url{\repo}}\\[2mm]
-                                \qrcode[level=L, 
+                            {\begin{minipage}[t]{0.1\columnwidth}
+                                \raisebox{-.3\columnwidth}{\qrcode[level=L, 
                                         version=0,
-                                        height=2cm]{\repo}
-                            \end{center}
-                            \vfill
+                                        height=\columnwidth]{\repo}}\\[1mm]
+                                \normalfont\footnotesize V \version{}
+                                \smallskip
+                            \end{minipage}\hfill
+                            \begin{minipage}[t]{0.87\columnwidth}
+                                \raggedright%
+                                \normalfont\Huge\bfseries\title{}\\
+                                \normalfont\Large\semester\ -- \dozent{}\\
+                                \normalfont\large Autoren:\\
+                                \normalfont\large\author{}\\[2mm]
+                                \normalfont\normalsize\myul{\url{\repo}}
+                            \end{minipage}
+                            %\hfill\null\vspace{1cm}
+                            % \begin{center}
+                            %     \normalfont\fontsize{35}{32}\selectfont\bfseries\title{}\\[7.5mm]
+                            %     \normalfont\huge\semester\ \dozent{}\\
+                            %     \normalfont\Large Autoren:\\
+                            %     \normalfont\Large\author{}\\[2mm]
+                            %     \normalfont\large Version:\\
+                            %     \normalfont\large\version{}\\
+                            %     \normalfont\normalsize\myul{\url{\repo}}\\[2mm]
+                            %     \qrcode[level=L, 
+                            %             version=0,
+                            %             height=2cm]{\repo}
+                            % \end{center}
+                            % \vfill
                             \section*{\contentsname}
                             \begingroup
                             \setlength{\columnsep}{5mm}
