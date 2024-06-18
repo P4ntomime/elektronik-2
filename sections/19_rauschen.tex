@@ -169,8 +169,8 @@ $$ \boxed{ \text{Mittlere Rauschleistungsdichte (in)} \frac{\volt^2}{\hertz}:  4
 \hfill
 \begin{minipage}[c]{0.8\columnwidth}
     Rauschquellen sind \textbf{Kleinsignalquellen!} \textrightarrow\ $V_{\rm in} =$ GND
-    $$ \boxed{\text{Rauschleistung:} \quad E_{\rm Vout} = 4 k T \cdot \frac{R_1 \cdot R_2}{R_1 + R_1} } $$
-    $$ \boxed{\text{Rauschspannung:} \quad V_{\rm rausch} = \sqrt{E_{\rm Vout} } } $$
+    $$ \boxed{\text{Rauschleistungsdichte:} \quad e_{\rm out}^2 = S_{\rm out} = 4 k T \cdot \frac{R_1 \cdot R_2}{R_1 + R_1} } $$
+    $$ \boxed{\text{Rauschspannungsdichte:} \quad e_{\rm out} = \sqrt{S_{\rm out} } } $$
 \end{minipage}
 
 
@@ -208,9 +208,6 @@ $$ \boxed{ \text{Mittlere Rauschleistungsdichte (in)} \frac{\volt^2}{\hertz}:  4
     \item Kapazitäten und Induktivitäten beeinflussen die \textbf{Bandbreite} des Systems! \\
         \textbf{Rauschspannung indirekt beeinflusst}
 \end{itemize}
-
-\vspace{0.2cm}
-\textrightarrow\ Sobald Kapazitäten oder Induktivitäten in einem Netzwerk vertreten sind, sind die Widerstände für das Rauschen egal!
 
 \begin{minipage}[c]{0.28\columnwidth}
     \includegraphics[width=\columnwidth]{images/rc_rauschen.png}
@@ -383,12 +380,12 @@ Die vereinfachte Berechnung darf angewendet werden wenn: (UND-Verknüpfung)
     \item Widerstand $R_3 = 0$ (\textrightarrow\ Abschnitt~\ref{Rauschen von OpAmps})
 \end{itemize}
 
-$$ \boxed{ V_{\rm noise} = \sqrt{4 k T \cdot R_2 \cdot A_{\rm noise} \cdot \underbrace{ \frac{\pi}{2} \frac{\text{GBP}}{A_{\rm OPV}} }_{\text{ENB}}
-+ e_w^2 \cdot A_{\rm noise}^2 \underbrace{ \frac{\pi}{2} \frac{\text{GBP}}{A_{\rm OPV}} }_{\text{ENB}} }} $$
+$$ \boxed{ V_{\rm noise} = \sqrt{4 k T \cdot R_2 \cdot A_{\rm noise} \cdot \underbrace{ \frac{\pi}{2} \frac{\text{GBW}}{A_{\rm noise}} }_{\text{ENB}}
++ e_w^2 \cdot A_{\rm noise}^2 \underbrace{ \frac{\pi}{2} \frac{\text{GBW}}{A_{\rm noise}} }_{\text{ENB}} }} $$
 
 \begin{tabular}{llc}
     ENB             & Effective Noise Bandwidth                 & $[\text{ENB}] = \hertz$ \\
-    GBW             & Gain Bandwidth (Product)                  & $[\text{GWB}] = \hertz$ \\
+    GBW             & Gain Bandwidth (Product)                  & $[\text{GBW}] = \hertz$ \\
     $A_{\rm noise}$ & Noise Gain                                & $[A_{\rm noise}] = 1$ \\
     $e_w$           & Rauschspannungsdichte (Datenblatt OpAmp)  & $[e_w] = \frac{\volt}{\sqrt{\hertz}}$ \\
 \end{tabular}
