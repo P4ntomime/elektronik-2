@@ -38,13 +38,12 @@
 
 \subsection{Low-Dropout-Regler mit pnp-Längstransistor (LDO)}
 
-\begin{minipage}[c]{0.25\columnwidth}
-    \includegraphics[width=\columnwidth]{images/ldo_pnp_transistor.png}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.74\columnwidth}
+\begin{minipage}[t]{0.25\columnwidth}
+    \includegraphics[align=t, width=\columnwidth]{images/ldo_pnp_transistor.png}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.74\columnwidth}
     \begin{itemize}
-        \item Feedback auf \textbf{positiven} OpAmp-Eingang!\\
+        \item Feedback auf \textbf{positiven} OpAmp-Eingang!
         \item Ansteuerung Längstransistor mit Basisspannung $< V_{\rm out}$
         \item Kleiner minimaler Spannungsabfall $V_{\rm CE}$ über Regler $(V_{\rm CE,sat}$)
         \item Auch erhältlich mit PMOS-Transistor statt pnp-Transistor\\
@@ -53,7 +52,8 @@
     \end{itemize}
 \end{minipage}
 $ \boxed{ V_{\rm out} = (V_{\rm Zener} + V_{\rm OS}) \Big( 1 + \frac{R_1}{R_2} \Big) }$
-$ \boxed{V_{\rm pos_{min}} = V_{\rm out} + V_{\rm rail} - V_{\rm CE}}$\\
+$ \boxed{V_{\rm pos_{min}} = V_{\rm out} + V_{\rm rail} - V_{\rm CE}}$
+
 
 \subsection{Einstellbarer Serie-Spannungsregler}
 

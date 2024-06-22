@@ -22,20 +22,22 @@
 \begin{minipage}{0.42\linewidth}
     \includegraphics[width=\linewidth]{images/dual_slope_ADC}
 \end{minipage}
-\hfill
 \begin{minipage}{0.27\linewidth}
     \includegraphics[width=0.83\linewidth]{images//dual_slope_ADC_timing}
 \end{minipage}
     \hfill
 \begin{minipage}{0.29\linewidth}
-    $ \boxed{  V_{\rm int} = \frac{\overline{V_{\rm in}} \cdot T_{\rm int}}{R_i \cdot C_i} } $ 
+    \centering
+    $ \boxed{  V_{\rm int} = \frac{\overline{V_{\rm in}} \cdot T_{\rm int}}{R_i \cdot C_i} } $
+
     $ \boxed{  V_{\rm abint} = \frac{V_{\rm ref} \cdot T_{\rm abint}}{R_i \cdot C_i}  } $ 
 \end{minipage}
     
 $ \boxed{ \text{DC: } V_{\rm int} = V_{\rm AGND}- \frac{1}{R_i \cdot C_i} \, (V_{\rm in1}- V_{\rm AGND}) \cdot T_{\rm int} } $ 
-\quad $\boxed{ \Delta V_{\rm abint} = - \Delta V_{\rm int} }$ \\
+\quad $\boxed{ \Delta V_{\rm abint} = - \Delta V_{\rm int} }$
+
 $ \boxed{ \Delta V_{\rm abint} = V_{\rm AGND} - V_{\rm int} = - \frac{1}{R_i \cdot C_i} \, (V_{\rm ref} - V_{\rm AGND}) \cdot T_{\rm abint} }$ 
-\quad $\boxed{ T_{\rm abint} = - \frac{V_{\rm in1} \cdot T_{\rm int}}{V_{\rm ref}} }$\\
+\quad $\boxed{ T_{\rm abint} = - \frac{V_{\rm in1} \cdot T_{\rm int}}{V_{\rm ref}} }$
   
 $\boxed{\text{Allgemein: } V_{\rm int} = \int\limits_0^{T_{\rm int}} - \frac{1}{R_i \cdot C_i} \, V_{\rm in1} \, \diff t + V_{\rm int,0} }$
 \quad 
