@@ -138,7 +138,15 @@
     \end{tabular}
 \end{minipage}
 
-$$ \boxed{ \text{Mittlere Rauschleistungsdichte (in)} \frac{\volt^2}{\hertz}:  4 k T R } $$ 
+
+\fbox{\parbox{0.68\columnwidth}{
+    \begin{tabular}{ll}
+        Rauschleistungsdichte   & $e_n^2 = S = 4 k T R$ \\
+        Rauschleistung          & $E = 4 k T R B$ \\
+        Rauschspannungsdichte   & $e_n = \sqrt{S} = \sqrt{e_n^2} = \sqrt{4 k T R}$ \\
+        Rauschspannung          & $v_n =  \sqrt{4 k T R B}$ \\
+    \end{tabular}
+}}
 
 
 \subsubsection{Serieschaltung von Widerständen}
@@ -169,8 +177,16 @@ $$ \boxed{ \text{Mittlere Rauschleistungsdichte (in)} \frac{\volt^2}{\hertz}:  4
 \hfill
 \begin{minipage}[c]{0.8\columnwidth}
     Rauschquellen sind \textbf{Kleinsignalquellen!} \textrightarrow\ $V_{\rm in} =$ GND
-    $$ \boxed{\text{Rauschleistungsdichte:} \quad e_{\rm out}^2 = S_{\rm out} = 4 k T \cdot \frac{R_1 \cdot R_2}{R_1 + R_1} } $$
-    $$ \boxed{\text{Rauschspannungsdichte:} \quad e_{\rm out} = \sqrt{S_{\rm out} } } $$
+
+\fbox{\parbox{0.8\columnwidth}{
+    \begin{tabular}{@{}ll@{}}
+        Rauschleistungsdichte   & $e_{\rm out}^2 = S_{\rm out} = 4 k T \frac{R_1 \cdot R_2}{R_1 + R_1}$ \\
+        Rauschleistung          & $E_{\rm out} = 4 k T \frac{R_1 \cdot R_2}{R_1 + R_1} B$ \\   
+        Rauschspannungsdichte   & $e_{\rm out} = \sqrt{S_{\rm out} } = \sqrt{ 4 k T \frac{R_1 \cdot R_2}{R_1 + R_1}}$ \\
+        Rauschspannung          & $v_{\rm out} = \sqrt{ 4 k T \frac{R_1 \cdot R_2}{R_1 + R_1} B}$ \\
+    \end{tabular}
+}}
+
 \end{minipage}
 
 
@@ -214,7 +230,7 @@ $$ \boxed{ \text{Mittlere Rauschleistungsdichte (in)} \frac{\volt^2}{\hertz}:  4
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.7\columnwidth}
-    $$ \boxed{ \text{Rauschspannung Ausgang:} \quad e_{\rm on} = \sqrt{\frac{k R }{C}} } $$
+    $$ \boxed{ \text{Rauschspannungsdichte Ausgang:} \quad e_{\rm on} = \sqrt{\frac{k R }{C}} } $$
 \end{minipage}
 
 
@@ -225,29 +241,6 @@ $$ e_{\rm on} = e_{\rm in} \sqrt{ \int\limits_{0}^{\infty} \frac{1}{1 + 2 \pi f 
     = e_{\rm in} \sqrt{\frac{1}{1 + 2 \pi f R C} \Biggl[ \tan^{-1}\big( 2 \pi f R C \big) \Biggr]_{0}^{\infty} } 
     = e_{\rm in} \sqrt{\frac{1}{1 + 2 \pi R C} \frac{\pi}{2} } $$
 Rauschspannung Ausgang: \quad $e_{\rm on} = \sqrt{4 k T R} \sqrt{\frac{1}{4 R C}} = \sqrt{\frac{k R }{C}} $
-
-
-% \subsection{Vorgehen Gesamt-Rauschen berechnen}
-% \label{Gesamt-Rauschen}
-
-% \begin{itemize}
-%     \item Lastwiderstände der Schaltung 'abhängen'
-%     \item Spannungs- und Stromquellen 'ausschalten'
-%     \item Von $R_L$ 'in Schaltung hineinschauen und Ersatzwiderstand $R_T$ berechnen
-%     \item Rauschleistung und ev. Rauschspannung berechnen
-% \end{itemize}
-
-
-% \subsubsection{Tipps und Tricks} 
-
-% \begin{outline}
-%     \1 \textbf{Impedanzen}(Kondensatoren, Spulen)
-%         \2 Rausch\textbf{leistung} berechnen (per Integral, da Impendanz variabel in Frequenz)
-%     \1 \textbf{Parallelschaltung} von Widerständen / Impedanzen
-%         \2 Rauschleistungen der einzelnen Komponenten separat berechnen
-%         \2 Einzelne Rauschleistungen \textbf{addieren}
-%         \2 Falls Rauschspannung gesucht: Wunzel ziehen 
-% \end{outline}
 
 
 \subsection{Rauschbandbreite}
@@ -293,7 +286,7 @@ Für $n$ kaskadierte Butterworth-Filter 1. Ordnung mir Grenzfrequenz $f_c = \fra
 \begin{minipage}[c]{0.58\columnwidth}
     \begin{outline}
         \1 6 Rauschquellen 
-            \2 $e_1$, $e_2$, $e_3$ sind \textbf{Rauschspannungen} der Widerstände
+            \2 $e_1$, $e_2$, $e_3$ sind \textbf{Rauschspannungsdichten} der Widerstände
             \2 $e_n$ ist Rauschsppannungsdichte des OpAmps
             \2 $i_{nn}$, $i_{np}$ sind Eingangsströme des OpAmps
         \1 Ausgangsspannung $V_{\rm noise}$ wird berechnet mittels \textbf{Superposition}
@@ -307,11 +300,20 @@ Jede Quelle trägt folgendermassen zum gesamten Rauschen bei (exkl. Stromquellen
     \includegraphics[width=\columnwidth]{images/rauschen_opamp_R1.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.4\columnwidth}
-    Beitrag von $R_1$ wird \textbf{invertierend} verstärkt \\
+\begin{minipage}[c]{0.58\columnwidth}
+    Beitrag von $R_1$ wird \textbf{invertierend} verstärkt 
+        
+    \fbox{\parbox{0.95\columnwidth}{
+        % reduce spacing between cols
+        \newlength{\otcs}
+        \setlength{\otcs}{\tabcolsep}
+        \setlength{\tabcolsep}{1mm}
 
-    Rauschspannung: $ - \frac{R_2}{R_1} \cdot e_1$ \\
-    Rauschleistung: $ \bigl(- \frac{R_2}{R_1} \bigr) \cdot e_1^2$
+        \begin{tabular}{@{}ll@{}}
+            Rauschspannungsdichte   & $e_{R_1} = \sqrt{4 k T R_1 \Big(- \frac{R_2}{R_1} \Big)} $ \\ % mathematisch illegal aber die slides sagen es so...
+            Rauschleistungsdichte   & $e_{R_1}^2 = 4 k T R_1 \Big(- \frac{R_2}{R_1} \Big)^2 $ \\
+        \end{tabular}
+    }}
 \end{minipage}
 
 
@@ -319,11 +321,15 @@ Jede Quelle trägt folgendermassen zum gesamten Rauschen bei (exkl. Stromquellen
     \includegraphics[width=\columnwidth]{images/rauschen_opamp_R2.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.4\columnwidth}
-    Beitrag von $R_2$ wird \textbf{nicht} verstärkt \\
+\begin{minipage}[c]{0.58\columnwidth}
+    Beitrag von $R_2$ wird \textbf{nicht} verstärkt 
 
-    Rauschspannung: $ 1 \cdot e_2$ \\
-    Rauschleistung: $ 1 \cdot e_2^2$
+    \fbox{\parbox{0.85\columnwidth}{
+        \begin{tabular}{@{}ll@{}}
+            Rauschspannungsdichte   & $e_{R_2} = \sqrt{4 k T R_2} $ \\
+            Rauschleistungsdichte   & $e_{R_2}^2 = 4 k T R_2 $ \\
+        \end{tabular}
+    }}
 \end{minipage}
 
 
@@ -331,11 +337,15 @@ Jede Quelle trägt folgendermassen zum gesamten Rauschen bei (exkl. Stromquellen
     \includegraphics[width=\columnwidth]{images/rauschen_opamp_R3.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.4\columnwidth}
-    Beitrag von $R_3$ wird \textbf{nicht-invertierend} verstärkt \\
+\begin{minipage}[c]{0.58\columnwidth}
+    Beitrag von $R_3$ wird \textbf{nicht-invertierend} verstärkt
 
-    Rauschspannung: $ \frac{R_1 + R_2}{R_1} \cdot e_3$ \\
-    Rauschleistung: $ \bigl(\frac{R_1 + R_2}{R_1} \bigr) \cdot e_3^2$
+    \fbox{\parbox{0.96\columnwidth}{
+        \begin{tabular}{@{}ll@{}}
+            Rauschspannungsdichte   & $e_{R_3} = \sqrt{4 k T R_3 \frac{R_1 + R_2}{R_1}} $ \\
+            Rauschleistungsdichte   & $e_{R_3}^2 = 4 k T R_3 \Big( \frac{R_1 + R_2}{R_1} \Big)^2 $ \\
+        \end{tabular}
+    }}
 \end{minipage}
 
 
@@ -343,11 +353,17 @@ Jede Quelle trägt folgendermassen zum gesamten Rauschen bei (exkl. Stromquellen
     \includegraphics[width=\columnwidth]{images/rauschen_opamp_en.png}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.4\columnwidth}
-    Beitrag von $e_n$ (OpAmp) wird \textbf{nicht-invertierend} verstärkt \\
+\begin{minipage}[c]{0.58\columnwidth}
+    Beitrag von $e_n$ (OpAmp) wird \textbf{nicht-invertierend} verstärkt 
 
-    Rauschspannung: $ \frac{R_1 + R_2}{R_1} \cdot e_n$ \\
-    Rauschleistung: $ \bigl(\frac{R_1 + R_2}{R_1} \bigr) \cdot e_n^2$
+    \fbox{\parbox{0.92\columnwidth}{
+        \begin{tabular}{@{}ll@{}}
+            Rauschspannungsdichte   & $e_{\rm opv} = \sqrt{e_n \frac{R_1 + R_2}{R_1}} $ \\
+            Rauschleistungsdichte   & $e_{\rm opv}^2 = e_n \Big( \frac{R_1 + R_2}{R_1} \Big)^2 $ \\
+        \end{tabular}
+
+        \setlength{\tabcolsep}{\otcs}   % set cols spacing back to default
+    }}
 \end{minipage}
 
 \vspace{0.2cm}
