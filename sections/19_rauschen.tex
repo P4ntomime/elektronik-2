@@ -291,12 +291,10 @@ Jede Quelle trägt folgendermassen zum gesamten Rauschen bei (exkl. Stromquellen
         
     \fbox{\parbox{0.95\columnwidth}{
         % reduce spacing between cols
-        \newlength{\otcs}
-        \setlength{\otcs}{\tabcolsep}
-        \setlength{\tabcolsep}{1mm}
-
+        \setlength{\tabcolsep}{2pt}
+        
         \begin{tabular}{@{}ll@{}}
-            Rauschspannungsdichte   & $e_{R_1} = \sqrt{4 k T R_1 \Big(- \frac{R_2}{R_1} \Big)} $ \\ % mathematisch illegal aber die slides sagen es so...
+            Rauschspannungsdichte   & $e_{R_1} = \sqrt{4 k T R_1 \Big(- \frac{R_2}{R_1} \Big)^2} $ \\
             Rauschleistungsdichte   & $e_{R_1}^2 = 4 k T R_1 \Big(- \frac{R_2}{R_1} \Big)^2 $ \\
         \end{tabular}
     }}
@@ -311,6 +309,9 @@ Jede Quelle trägt folgendermassen zum gesamten Rauschen bei (exkl. Stromquellen
     Beitrag von $R_2$ wird \textbf{nicht} verstärkt 
 
     \fbox{\parbox{0.85\columnwidth}{
+        % reduce spacing between cols
+        \setlength{\tabcolsep}{2pt}
+
         \begin{tabular}{@{}ll@{}}
             Rauschspannungsdichte   & $e_{R_2} = \sqrt{4 k T R_2} $ \\
             Rauschleistungsdichte   & $e_{R_2}^2 = 4 k T R_2 $ \\
@@ -325,10 +326,13 @@ Jede Quelle trägt folgendermassen zum gesamten Rauschen bei (exkl. Stromquellen
 \hfill
 \begin{minipage}[c]{0.58\columnwidth}
     Beitrag von $R_3$ wird \textbf{nicht-invertierend} verstärkt
-
+    
     \fbox{\parbox{0.96\columnwidth}{
+        % reduce spacing between cols
+        \setlength{\tabcolsep}{2pt}
+
         \begin{tabular}{@{}ll@{}}
-            Rauschspannungsdichte   & $e_{R_3} = \sqrt{4 k T R_3 \frac{R_1 + R_2}{R_1}} $ \\
+            Rauschspannungsdichte   & $e_{R_3} = \sqrt{4 k T R_3 \Big( \frac{R_1 + R_2}{R_1} \Big)^2} $ \\
             Rauschleistungsdichte   & $e_{R_3}^2 = 4 k T R_3 \Big( \frac{R_1 + R_2}{R_1} \Big)^2 $ \\
         \end{tabular}
     }}
@@ -343,12 +347,13 @@ Jede Quelle trägt folgendermassen zum gesamten Rauschen bei (exkl. Stromquellen
     Beitrag von $e_n$ (OpAmp) wird \textbf{nicht-invertierend} verstärkt 
 
     \fbox{\parbox{0.92\columnwidth}{
+        % reduce spacing between cols
+        \setlength{\tabcolsep}{2pt}
+
         \begin{tabular}{@{}ll@{}}
-            Rauschspannungsdichte   & $e_{\rm opv} = \sqrt{e_n \frac{R_1 + R_2}{R_1}} $ \\
+            Rauschspannungsdichte   & $e_{\rm opv} = \sqrt{e_n \Big( \frac{R_1 + R_2}{R_1}} \Big)^2 $ \\
             Rauschleistungsdichte   & $e_{\rm opv}^2 = e_n \Big( \frac{R_1 + R_2}{R_1} \Big)^2 $ \\
         \end{tabular}
-
-        \setlength{\tabcolsep}{\otcs}   % set cols spacing back to default
     }}
 \end{minipage}
 
